@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="category"
+            type="playground.develop.fdelivery.data.Category" />
+    </data>
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/list_item_categories_parent_height"
+        android:layout_margin="@dimen/list_item_categories_parent_margin"
+        app:cardCornerRadius="@dimen/list_item_categories_parent_radius"
+        app:cardElevation="@dimen/common_elevation">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/listItemCategoryImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/category_background"
+                android:src="@drawable/ic_orange"
+                app:loadImage="@{category.icon}" />
+
+            <TextView
+                android:id="@+id/listItemCategoryName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/baloo"
+                android:padding="@dimen/list_item_categories_name_padding"
+                android:text="@{category.name}"
+                android:textAppearance="@style/TextAppearance.AppCompat" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="productHandlers"
+            type="playground.develop.fdelivery.ui.activities.ProductDetailsActivity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mainBackgroundColor">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="@dimen/main_image_button_width"
+            android:layout_height="@dimen/main_image_button_height"
+            android:layout_margin="@dimen/main_buttons_margin"
+            android:background="@drawable/image_button_background"
+            android:elevation="@dimen/common_elevation"
+            android:onClick="@{productHandlers::onBackPress}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_back_arrow" />
+
+        <ImageButton
+            android:id="@+id/favoriteProductButton"
+            android:layout_width="@dimen/main_image_button_width"
+            android:layout_height="@dimen/main_image_button_height"
+            android:layout_margin="@dimen/main_buttons_margin"
+            android:background="@drawable/favorite_product_button_background"
+            android:elevation="@dimen/common_elevation"
+            android:onClick="@{productHandlers::onFavoriteProduct}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_favorite_white" />
+
+        <ImageView
+            android:id="@+id/productImage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/product_details_image_height"
+            android:src="@drawable/orange_juice"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/product_details_background"
+            android:elevation="@dimen/common_elevation"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/productImage">
+
+            <TextView
+                android:id="@+id/productName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/product_details_name_margin"
+                android:fontFamily="@font/baloo"
+                android:text="Drinky Orange Juice"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.willy.ratingbar.ScaleRatingBar
+                android:id="@+id/simpleRatingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/productName"
+                app:layout_constraintTop_toBottomOf="@id/productName"
+                app:srb_clearRatingEnabled="true"
+                app:srb_clickable="true"
+                app:srb_drawableEmpty="@drawable/ic_rating_empty"
+                app:srb_drawableFilled="@drawable/ic_rating_fill"
+                app:srb_isIndicator="false"
+                app:srb_minimumStars="1"
+                app:srb_numStars="5"
+                app:srb_rating="4"
+                app:srb_scrollable="true"
+                app:srb_starHeight="28dp"
+                app:srb_starPadding="0.5dp"
+                app:srb_starWidth="30dp"
+                app:srb_stepSize="1" />
+
+            <LinearLayout
+                android:id="@+id/cartCounterParent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/cart_counter_parent_margin"
+                android:background="@drawable/counter_cart_background"
+                android:elevation="@dimen/common_elevation"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@id/simpleRatingBar"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/simpleRatingBar">
+
+                <ImageButton
+                    android:layout_width="@dimen/cart_counter_button_width"
+                    android:layout_height="@dimen/cart_counter_button_height"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:onClick="@{productHandlers::onMinusClick}"
+                    android:src="@drawable/ic_minus" />
+
+                <TextView
+                    android:id="@+id/counterText"
+                    android:layout_width="@dimen/cart_counter_button_width"
+                    android:layout_height="@dimen/cart_counter_button_height"
+                    android:background="@drawable/counter_cart_background"
+                    android:fontFamily="@font/baloo"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="@color/secondaryTextColor"
+                    android:textSize="@dimen/counter_text_size" />
+
+                <ImageButton
+                    android:layout_width="@dimen/cart_counter_button_width"
+                    android:layout_height="@dimen/cart_counter_button_height"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:onClick="@{productHandlers::onPlusClick}"
+                    android:src="@drawable/ic_plus" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/productDetailsSpecsParent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/product_specs_parent_margin_top"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/simpleRatingBar"
+                app:layout_constraintTop_toBottomOf="@id/simpleRatingBar">
+
+                <ImageView
+                    android:id="@+id/caloriesDetailsImage"
+                    android:layout_width="@dimen/product_details_spec_images_width"
+                    android:layout_height="@dimen/product_details_spec_height"
+                    android:src="@drawable/ic_calories" />
+
+                <TextView
+                    android:id="@+id/caloriesDetailsText"
+                    style="@style/ProductDetailsTextStyle"
+                    android:text="90 Calories" />
+
+                <ImageView
+                    android:id="@+id/deliveryDetailsImage"
+                    android:layout_width="@dimen/product_details_spec_images_width"
+                    android:layout_height="@dimen/product_details_spec_height"
+                    android:src="@drawable/ic_delivery_man" />
+
+                <TextView
+                    android:id="@+id/deliveryDetailsText"
+                    style="@style/ProductDetailsTextStyle"
+                    android:text="Free Delivery" />
+
+                <ImageView
+                    android:id="@+id/preparationDetailsImage"
+                    android:layout_width="@dimen/product_details_spec_images_width"
+                    android:layout_height="@dimen/product_details_spec_height"
+                    android:src="@drawable/ic_clock" />
+
+                <TextView
+                    android:id="@+id/preparationDetailsText"
+                    style="@style/ProductDetailsTextStyle"
+                    android:text="30 - 40 mins" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/freshLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/product_fresh_label_margin_top"
+                android:fontFamily="@font/baloo"
+                android:text="Guaranteed Fresh"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                app:layout_constraintStart_toStartOf="@+id/productDetailsSpecsParent"
+                app:layout_constraintTop_toBottomOf="@id/productDetailsSpecsParent" />
+
+            <TextView
+                android:id="@+id/descriptionLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/product_description_label_margin_top"
+                android:fontFamily="@font/baloo"
+                android:text="Description"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                app:layout_constraintStart_toStartOf="@+id/freshLabel"
+                app:layout_constraintTop_toBottomOf="@id/freshLabel" />
+
+            <TextView
+                android:id="@+id/descriptionText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Why We Love it: Our citrusy-sweet OJ is Fresh-squeezed,
+
+\njuized from the best oranges and sent directly to you \nwithout additives or pasteurization"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintStart_toStartOf="@id/descriptionLabel"
+                app:layout_constraintTop_toBottomOf="@id/descriptionLabel" />
+
+            <LinearLayout
+                android:id="@+id/totalPriceParent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/product_price_cart_background"
+                android:elevation="@dimen/common_elevation"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:id="@+id/productTotalPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/product_total_price_margin"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="$25.00"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:textSize="@dimen/product_total_price_size" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/product_add_cart_margin"
+                    android:layout_weight="1"
+                    android:background="@drawable/cart_add_product_background"
+                    android:elevation="@dimen/common_elevation"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/product_details_cart_ic_width"
+                        android:layout_height="@dimen/product_details_cart_ic_height"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/product_details_cart_ic_margin"
+                        android:background="@drawable/cart_button_background"
+                        android:src="@drawable/ic_cart" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/product_details_cart_text_margin"
+                        android:gravity="center"
+                        android:text="Add to Cart"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textSize="@dimen/product_details_cart_text_size" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

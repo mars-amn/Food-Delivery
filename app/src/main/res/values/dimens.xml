@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <dimen name="main_buttons_margin">12dp</dimen>
+    <dimen name="main_image_button_width">40dp</dimen>
+    <dimen name="main_image_button_height">30dp</dimen>
+    <dimen name="list_item_products_parent_margin">16dp</dimen>
+    <dimen name="list_item_products_parent_elevation">12dp</dimen>
+    <dimen name="list_item_products_image_height">240dp</dimen>
+    <dimen name="list_item_products_name_padding">8dp</dimen>
+    <dimen name="list_item_products_name_size">16sp</dimen>
+    <dimen name="list_item_products_description_padding">8dp</dimen>
+    <dimen name="list_item_products_description_size">12sp</dimen>
+    <dimen name="list_item_products_price_padding">8dp</dimen>
+    <dimen name="list_item_products_price_size">18sp</dimen>
+    <dimen name="list_item_products_cart_margin">8dp</dimen>
+    <dimen name="list_item_products_cart_width">40dp</dimen>
+    <dimen name="list_item_products_cart_height">40dp</dimen>
+    <dimen name="recyclerview_margin">2dp</dimen>
+    <dimen name="design_fab_image_size" tools:override="true">56dp</dimen>
+    <dimen name="cart_counter_button_width">35dp</dimen>
+    <dimen name="cart_counter_button_height">30dp</dimen>
+    <dimen name="product_details_spec_images_width">30dp</dimen>
+    <dimen name="product_details_spec_height">30dp</dimen>
+    <dimen name="product_details_text_size">12sp</dimen>
+    <dimen name="common_elevation">12dp</dimen>
+    <dimen name="product_details_image_height">300dp</dimen>
+    <dimen name="product_details_name_margin">16dp</dimen>
+    <dimen name="cart_counter_parent_margin">16dp</dimen>
+    <dimen name="counter_text_size">18sp</dimen>
+    <dimen name="product_specs_parent_margin_top">16dp</dimen>
+    <dimen name="product_fresh_label_margin_top">16dp</dimen>
+    <dimen name="product_description_label_margin_top">16dp</dimen>
+    <dimen name="product_total_price_margin">8dp</dimen>
+    <dimen name="product_total_price_size">32sp</dimen>
+    <dimen name="product_add_cart_margin">12dp</dimen>
+    <dimen name="product_details_cart_ic_width">40dp</dimen>
+    <dimen name="product_details_cart_ic_height">40dp</dimen>
+    <dimen name="product_details_cart_ic_margin">4dp</dimen>
+    <dimen name="product_details_cart_text_margin">4dp</dimen>
+    <dimen name="product_details_cart_text_size">22sp</dimen>
+    <dimen name="main_cart_button_width">70dp</dimen>
+    <dimen name="main_cart_button_height">70dp</dimen>
+    <dimen name="main_cart_button_margin_bottom">40dp</dimen>
+    <dimen name="bottom_nav_bar_height">56dp</dimen>
+    <dimen name="main_text_label_margin_start">8dp</dimen>
+    <dimen name="main_text_label_size">30sp</dimen>
+    <dimen name="search_bar_height">50dp</dimen>
+    <dimen name="search_bar_margin">2dp</dimen>
+    <dimen name="list_item_categories_parent_height">40dp</dimen>
+    <dimen name="list_item_categories_parent_margin">12dp</dimen>
+    <dimen name="list_item_categories_parent_radius">6dp</dimen>
+    <dimen name="list_item_categories_name_padding">8dp</dimen>
+    <dimen name="list_item_products_parent_width">250dp</dimen>
+
+</resources>

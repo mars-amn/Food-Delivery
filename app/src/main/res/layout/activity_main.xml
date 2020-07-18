@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="mainHandlers"
+            type="playground.develop.fdelivery.ui.activities.MainActivity" />
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:openDrawer="start">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/homeContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/mainBackgroundColor">
+
+                <ImageButton
+                    android:id="@+id/menuButton"
+                    android:layout_width="@dimen/main_image_button_width"
+                    android:layout_height="@dimen/main_image_button_height"
+                    android:layout_margin="@dimen/main_buttons_margin"
+                    android:background="@drawable/image_button_background"
+                    android:onClick="@{mainHandlers::onNavDrawerClick}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_nav_menu" />
+
+                <ImageButton
+                    android:id="@+id/profileButton"
+                    android:layout_width="@dimen/main_image_button_width"
+                    android:layout_height="@dimen/main_image_button_height"
+                    android:layout_margin="@dimen/main_buttons_margin"
+                    android:background="@drawable/image_button_background"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/person"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <FrameLayout
+                    android:id="@+id/mainContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="2dp"
+                    app:layout_constraintBottom_toBottomOf="@id/cartButton"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/menuButton" />
+
+
+                <playground.develop.fdelivery.custom.CurvedBottomNavigationView
+                    android:id="@+id/bottomNavBar"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/bottom_nav_bar_height"
+                    android:background="@android:color/transparent"
+                    app:itemIconTint="@color/bottom_nav_icon_color_selector"
+                    app:itemTextColor="@color/bottom_nav_icon_color_selector"
+                    app:labelVisibilityMode="unlabeled"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:menu="@menu/main_bottom_menu" />
+
+                <ImageButton
+                    android:id="@+id/cartButton"
+                    android:layout_width="@dimen/main_cart_button_width"
+                    android:layout_height="@dimen/main_cart_button_height"
+                    android:layout_marginBottom="@dimen/main_cart_button_margin_bottom"
+                    android:background="@drawable/main_button_background"
+                    android:onClick="@{mainHandlers::onCartButtonClick}"
+                    android:scaleType="center"
+                    app:layout_constraintBottom_toBottomOf="@id/bottomNavBar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@drawable/ic_shopping_basket"
+                    app:useCompatPadding="true" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigationView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            app:headerLayout="@layout/home_nav_header" />
+    </androidx.drawerlayout.widget.DrawerLayout>
+</layout>
