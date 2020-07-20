@@ -19,8 +19,12 @@ class FavoriteProductsViewModel : ViewModel(), KoinComponent {
         return mRepository.addProduct(product)
     }
 
+    fun deleteProduct(product: FavProducts) {
+        mRepository.deleteProduct(product)
+    }
     override fun onCleared() {
         super.onCleared()
         mRepository.dispose()
     }
+
 }

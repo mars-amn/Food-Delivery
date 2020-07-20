@@ -6,6 +6,7 @@ import androidx.paging.DataSource
 import androidx.paging.PagedList
 import androidx.paging.RxPagedListBuilder
 import io.reactivex.BackpressureStrategy
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
@@ -50,6 +51,12 @@ class FavoriteProductsRepository : KoinComponent {
 
             }))
         return productId
+    }
+
+    fun deleteProduct(product: FavProducts) {
+        mDisposables.add(
+            Observable.fromCallable { mDao.deleteProduct(product) }.subscribeOn(Schedulers.io())
+                .subscribe())
     }
 
     fun dispose() {

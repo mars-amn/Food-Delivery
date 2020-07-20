@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+<variable
+    name="handlers"
+    type="playground.develop.fdelivery.adapters.FavoriteProductsAdapter.FavoriteProductsVH" />
         <variable
             name="product"
             type="playground.develop.fdelivery.database.locale.favorite.FavProducts" />
@@ -14,6 +16,8 @@
         android:layout_height="300dp"
         android:layout_margin="@dimen/list_item_favorite_parent_margin"
         app:cardCornerRadius="@dimen/list_item_favorite_parent_radius"
+        android:onLongClick="@{handlers::onProductLongClick}"
+        android:longClickable="true"
         app:cardElevation="@dimen/common_elevation">
 
         <androidx.constraintlayout.widget.ConstraintLayout

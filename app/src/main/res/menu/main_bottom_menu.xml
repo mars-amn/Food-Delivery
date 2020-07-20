@@ -14,4 +14,22 @@
         android:icon="@drawable/ic_favorite"
         android:title=""
         app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_empty"
+        android:enabled="false"
+        android:title=""
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_person"
+        android:enabled="true"
+        android:icon="@drawable/ic_person"
+        android:title=""
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_grid"
+        android:enabled="true"
+        android:icon="@drawable/ic_grid"
+        android:title=""
+        app:showAsAction="ifRoom" />
 </menu>

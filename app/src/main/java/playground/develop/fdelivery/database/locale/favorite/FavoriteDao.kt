@@ -16,5 +16,5 @@ interface FavoriteDao {
     fun getFavoriteProducts(): DataSource.Factory<Int, FavProducts>
 
     @Delete
-    fun deleteFavProduct(favProducts: FavProducts)
+    fun deleteProduct(favProducts: FavProducts): Int
 }
