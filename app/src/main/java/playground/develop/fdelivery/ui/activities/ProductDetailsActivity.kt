@@ -19,11 +19,11 @@ import playground.develop.fdelivery.data.Product
 import playground.develop.fdelivery.database.locale.favorite.FavProducts
 import playground.develop.fdelivery.databinding.ActivityProductDetailsBinding
 import playground.develop.fdelivery.utils.Extensions.short
-import playground.develop.fdelivery.viewmodel.FavoriteViewModel
+import playground.develop.fdelivery.viewmodel.FavoriteProductsViewModel
 
 class ProductDetailsActivity : TransformationAppCompatActivity() {
 
-    private val mFavoriteViewModel: FavoriteViewModel by viewModel()
+    private val mFavoriteViewModel: FavoriteProductsViewModel by viewModel()
     private lateinit var mBinding: ActivityProductDetailsBinding
     private lateinit var mProduct: Product
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,9 +93,10 @@ class ProductDetailsActivity : TransformationAppCompatActivity() {
 
     fun onFavoriteProduct(v: View) {
         val favProducts =
-            FavProducts(mProduct.name, mProduct.description, mProduct.image, mProduct.price, mProduct.code)
+            FavProducts(mProduct.name, mProduct.description, mProduct.image, mProduct.price,
+                mProduct.code)
 
-        mFavoriteViewModel.insertFavoriteProduct(favProducts).observe(this, Observer { id ->
+        mFavoriteViewModel.addProductToFavorite(favProducts).observe(this, Observer { id ->
             short(this, "$id")
         })
     }
@@ -104,7 +105,8 @@ class ProductDetailsActivity : TransformationAppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController?.hide(statusBars())
         } else {
-            window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+            window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN)
         }
     }
 }

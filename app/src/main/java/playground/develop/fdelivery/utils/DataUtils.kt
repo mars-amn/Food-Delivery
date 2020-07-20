@@ -15,9 +15,12 @@ object DataUtils {
 
     fun getProducts(): List<Product> {
         val products = ArrayList<Product>()
-        products.add(Product(R.drawable.orange_juice, "Drinky Orange Juice", "Made with love and fresh seasonal fruits.", 12.3f, 40))
-        products.add(Product(R.drawable.orange_juice, "Drinky Lemon & Mint Juice", "Made with love and fresh seasonal fruits.", 70.55f, 55))
-        products.add(Product(R.drawable.orange_juice, "Drinky Lemon & Mint Juice", "Made with love and fresh seasonal fruits.", 7.525f, 88))
+        products.add(Product(R.drawable.orange_juice, "Drinky Orange Juice",
+            "Made with love and fresh seasonal fruits.", 12.3f, 40))
+        products.add(Product(R.drawable.orange_juice, "Drinky Lemon & Mint Juice",
+            "Made with love and fresh seasonal fruits.", 70.55f, 55))
+        products.add(Product(R.drawable.orange_juice, "Drinky Lemon & Mint Juice",
+            "Made with love and fresh seasonal fruits.", 7.525f, 88))
         return products
     }
 }

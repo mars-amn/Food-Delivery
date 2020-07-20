@@ -8,7 +8,7 @@ import playground.develop.fdelivery.data.Category
 import playground.develop.fdelivery.databinding.ListItemCategoryBinding
 
 class CategoryAdapter(private val mContext: Context, private var mCategories: List<Category>) :
-        RecyclerView.Adapter<CategoryAdapter.CategoriesVH>() {
+    RecyclerView.Adapter<CategoryAdapter.CategoriesVH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoriesVH {
         val inflater = LayoutInflater.from(mContext)
@@ -22,8 +22,8 @@ class CategoryAdapter(private val mContext: Context, private var mCategories: Li
         holder.bind(mCategories[position])
     }
 
-    inner class CategoriesVH(
-            private val mBinding: ListItemCategoryBinding) : RecyclerView.ViewHolder(mBinding.root) {
+    inner class CategoriesVH(private val mBinding: ListItemCategoryBinding) :
+        RecyclerView.ViewHolder(mBinding.root) {
 
 
         fun bind(category: Category) {

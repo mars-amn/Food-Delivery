@@ -2,4 +2,6 @@
     <string name="app_name">Delivery</string>
     <string name="total_price">$%1$s</string>
     <string name="main_label">Find Out The \nDrinks you Love</string>
+    <string name="favorite_empty_state_first_text">Your favorite list is empty!\n add products to the list\n by pressing the</string>
+    <string name="favorite_empty_state_second_text">Button in any product screen</string>
 </resources>

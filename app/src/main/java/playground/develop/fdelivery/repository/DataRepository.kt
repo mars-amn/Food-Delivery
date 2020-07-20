@@ -15,22 +15,22 @@ class DataRepository {
 
     fun getCategories(): LiveData<List<Category>> {
         val categories = MutableLiveData<List<Category>>()
-        mDisposables.add(Observable.fromCallable { DataUtils.getCategories() }
-                             .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                             .subscribe {
-                                 categories.value = DataUtils.getCategories()
-                             })
+        mDisposables.add(
+            Observable.fromCallable { DataUtils.getCategories() }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe {
+                    categories.value = DataUtils.getCategories()
+                })
         return categories
 
     }
 
     fun getProducts(): LiveData<List<Product>> {
         val products = MutableLiveData<List<Product>>()
-        mDisposables.add(Observable.fromCallable { DataUtils.getProducts() }
-                             .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                             .subscribe {
-                                 products.value = DataUtils.getProducts()
-                             })
+        mDisposables.add(
+            Observable.fromCallable { DataUtils.getProducts() }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe {
+                    products.value = DataUtils.getProducts()
+                })
         return products
     }
 

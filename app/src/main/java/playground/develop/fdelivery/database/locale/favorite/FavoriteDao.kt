@@ -1,5 +1,6 @@
 package playground.develop.fdelivery.database.locale.favorite
 
+import androidx.paging.DataSource
 import androidx.room.*
 import io.reactivex.Single
 
@@ -12,7 +13,7 @@ interface FavoriteDao {
     fun getFavProduct(id: Long): FavProducts
 
     @Query("SELECT * FROM FavoriteProducts")
-    fun getFavProducts(): List<FavProducts>
+    fun getFavoriteProducts(): DataSource.Factory<Int, FavProducts>
 
     @Delete
     fun deleteFavProduct(favProducts: FavProducts)

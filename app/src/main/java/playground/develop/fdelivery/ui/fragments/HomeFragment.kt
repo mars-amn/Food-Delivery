@@ -22,7 +22,7 @@ class HomeFragment : Fragment() {
     private lateinit var mBinding: FragmentHomeBinding
     private val mAppViewModel: AppViewModel by viewModel()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+        savedInstanceState: Bundle?): View? {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         loadCategories()
         loadProducts()
@@ -35,8 +35,8 @@ class HomeFragment : Fragment() {
             //   val wrapper = InfiniteScrollAdapter.wrap(productsAdapter)
             mBinding.productsRecyclerView.apply {
                 setSlideOnFling(true)
-                setItemTransformer(ScaleTransformer.Builder().setMaxScale(1.05f).setMinScale(0.8f)
-                                       .build())
+                setItemTransformer(
+                    ScaleTransformer.Builder().setMaxScale(1.05f).setMinScale(0.8f).build())
                 adapter = AlphaInAnimationAdapter(productsAdapter).apply {
                     setDuration(1000)
                 }

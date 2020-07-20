@@ -12,7 +12,7 @@ import playground.develop.fdelivery.databinding.ListItemProductsBinding
 import playground.develop.fdelivery.ui.activities.ProductDetailsActivity
 
 class ProductsAdapter(private val mContext: Context, private val mProducts: List<Product>) :
-        RecyclerView.Adapter<ProductsAdapter.ProductsVH>() {
+    RecyclerView.Adapter<ProductsAdapter.ProductsVH>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductsVH {
         val inflater = LayoutInflater.from(mContext)
         val binding = ListItemProductsBinding.inflate(inflater, parent, false)
@@ -25,8 +25,8 @@ class ProductsAdapter(private val mContext: Context, private val mProducts: List
         holder.bind(mProducts[position])
     }
 
-    inner class ProductsVH(
-            private val mBinding: ListItemProductsBinding) : RecyclerView.ViewHolder(mBinding.root) {
+    inner class ProductsVH(private val mBinding: ListItemProductsBinding) :
+        RecyclerView.ViewHolder(mBinding.root) {
         init {
             mBinding.productHandlers = this
         }

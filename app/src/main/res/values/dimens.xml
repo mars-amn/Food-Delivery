@@ -51,5 +51,12 @@
     <dimen name="list_item_categories_parent_radius">6dp</dimen>
     <dimen name="list_item_categories_name_padding">8dp</dimen>
     <dimen name="list_item_products_parent_width">250dp</dimen>
+    <dimen name="list_item_parent_margin">8dp</dimen>
+    <dimen name="list_item_favorite_name_text_size">20sp</dimen>
+    <dimen name="list_item_favorite_name_text_margin">8dp</dimen>
+    <dimen name="favorite_empty_state_first_margin">16dp</dimen>
+    <dimen name="favorite_empty_state_first_size">30sp</dimen>
+    <dimen name="list_item_favorite_parent_margin">2dp</dimen>
+    <dimen name="list_item_favorite_parent_radius">8dp</dimen>
 
 </resources>
