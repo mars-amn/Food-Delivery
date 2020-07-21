@@ -1,4 +1,4 @@
-package playground.develop.fdelivery.database.locale.favorite
+package playground.develop.fdelivery.database.local.favorite
 
 import androidx.paging.DataSource
 import androidx.room.*

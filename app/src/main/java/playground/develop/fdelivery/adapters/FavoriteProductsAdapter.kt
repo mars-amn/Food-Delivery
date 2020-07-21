@@ -7,14 +7,13 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import playground.develop.fdelivery.database.locale.favorite.FavProducts
+import playground.develop.fdelivery.database.local.favorite.FavProducts
 import playground.develop.fdelivery.databinding.ListItemFavoriteBinding
 
 class FavoriteProductsAdapter(private val mListener: DeletionListener,
     private val context: Context) :
     PagedListAdapter<FavProducts, FavoriteProductsAdapter.FavoriteProductsVH>(
-        FavoriteProductsDiffCallback()) {
+            FavoriteProductsDiffCallback()) {
     interface DeletionListener {
         fun onFavProductLongClick(product: FavProducts)
     }

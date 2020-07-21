@@ -5,6 +5,9 @@ import android.graphics.*
 import android.util.AttributeSet
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
+/**
+ * @see <a href="https://www.androidtutorialonline.com/draw-curved-bottom-navigation-view">Draw Curved Bottom Navigation View</a>
+ */
 
 class CurvedBottomNavigationView : BottomNavigationView {
     private var mPath: Path? = null
@@ -36,7 +39,8 @@ class CurvedBottomNavigationView : BottomNavigationView {
     }
 
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context!!,
-        attrs, defStyleAttr) {
+            attrs,
+            defStyleAttr) {
         init()
     }
 
@@ -55,30 +59,26 @@ class CurvedBottomNavigationView : BottomNavigationView {
         mNavigationBarWidth = width
         mNavigationBarHeight = height
         // the coordinates (x,y) of the start point before curve
-        mFirstCurveStartPoint.set(
-            mNavigationBarWidth / 2 - CURVE_CIRCLE_RADIUS * 2 - CURVE_CIRCLE_RADIUS / 3, 0)
+        mFirstCurveStartPoint.set(mNavigationBarWidth / 2 - CURVE_CIRCLE_RADIUS * 2 - CURVE_CIRCLE_RADIUS / 3,
+                0)
         // the coordinates (x,y) of the end point after curve
         mFirstCurveEndPoint.set(mNavigationBarWidth / 2,
-            CURVE_CIRCLE_RADIUS + CURVE_CIRCLE_RADIUS / 4)
+                CURVE_CIRCLE_RADIUS + CURVE_CIRCLE_RADIUS / 4)
         // same thing for the second curve
         mSecondCurveStartPoint = mFirstCurveEndPoint
-        mSecondCurveEndPoint.set(
-            mNavigationBarWidth / 2 + CURVE_CIRCLE_RADIUS * 2 + CURVE_CIRCLE_RADIUS / 3, 0)
+        mSecondCurveEndPoint.set(mNavigationBarWidth / 2 + CURVE_CIRCLE_RADIUS * 2 + CURVE_CIRCLE_RADIUS / 3,
+                0)
 
         // the coordinates (x,y)  of the 1st control point on a cubic curve
-        mFirstCurveControlPoint1.set(
-            mFirstCurveStartPoint.x + CURVE_CIRCLE_RADIUS + CURVE_CIRCLE_RADIUS / 4,
-            mFirstCurveStartPoint.y)
+        mFirstCurveControlPoint1.set(mFirstCurveStartPoint.x + CURVE_CIRCLE_RADIUS + CURVE_CIRCLE_RADIUS / 4,
+                mFirstCurveStartPoint.y)
         // the coordinates (x,y)  of the 2nd control point on a cubic curve
-        mFirstCurveControlPoint2.set(
-            mFirstCurveEndPoint.x - CURVE_CIRCLE_RADIUS * 2 + CURVE_CIRCLE_RADIUS,
-            mFirstCurveEndPoint.y)
-        mSecondCurveControlPoint1.set(
-            mSecondCurveStartPoint.x + CURVE_CIRCLE_RADIUS * 2 - CURVE_CIRCLE_RADIUS,
-            mSecondCurveStartPoint.y)
-        mSecondCurveControlPoint2.set(
-            mSecondCurveEndPoint.x - (CURVE_CIRCLE_RADIUS + CURVE_CIRCLE_RADIUS / 4),
-            mSecondCurveEndPoint.y)
+        mFirstCurveControlPoint2.set(mFirstCurveEndPoint.x - CURVE_CIRCLE_RADIUS * 2 + CURVE_CIRCLE_RADIUS,
+                mFirstCurveEndPoint.y)
+        mSecondCurveControlPoint1.set(mSecondCurveStartPoint.x + CURVE_CIRCLE_RADIUS * 2 - CURVE_CIRCLE_RADIUS,
+                mSecondCurveStartPoint.y)
+        mSecondCurveControlPoint2.set(mSecondCurveEndPoint.x - (CURVE_CIRCLE_RADIUS + CURVE_CIRCLE_RADIUS / 4),
+                mSecondCurveEndPoint.y)
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -86,13 +86,18 @@ class CurvedBottomNavigationView : BottomNavigationView {
         mPath!!.reset()
         mPath!!.moveTo(0f, 0f)
         mPath!!.lineTo(mFirstCurveStartPoint.x.toFloat(), mFirstCurveStartPoint.y.toFloat())
-        mPath!!.cubicTo(mFirstCurveControlPoint1.x.toFloat(), mFirstCurveControlPoint1.y.toFloat(),
-            mFirstCurveControlPoint2.x.toFloat(), mFirstCurveControlPoint2.y.toFloat(),
-            mFirstCurveEndPoint.x.toFloat(), mFirstCurveEndPoint.y.toFloat())
+        mPath!!.cubicTo(mFirstCurveControlPoint1.x.toFloat(),
+                mFirstCurveControlPoint1.y.toFloat(),
+                mFirstCurveControlPoint2.x.toFloat(),
+                mFirstCurveControlPoint2.y.toFloat(),
+                mFirstCurveEndPoint.x.toFloat(),
+                mFirstCurveEndPoint.y.toFloat())
         mPath!!.cubicTo(mSecondCurveControlPoint1.x.toFloat(),
-            mSecondCurveControlPoint1.y.toFloat(), mSecondCurveControlPoint2.x.toFloat(),
-            mSecondCurveControlPoint2.y.toFloat(), mSecondCurveEndPoint.x.toFloat(),
-            mSecondCurveEndPoint.y.toFloat())
+                mSecondCurveControlPoint1.y.toFloat(),
+                mSecondCurveControlPoint2.x.toFloat(),
+                mSecondCurveControlPoint2.y.toFloat(),
+                mSecondCurveEndPoint.x.toFloat(),
+                mSecondCurveEndPoint.y.toFloat())
         mPath!!.lineTo(mNavigationBarWidth.toFloat(), 0f)
         mPath!!.lineTo(mNavigationBarWidth.toFloat(), mNavigationBarHeight.toFloat())
         mPath!!.lineTo(0f, mNavigationBarHeight.toFloat())

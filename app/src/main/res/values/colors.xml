@@ -6,4 +6,5 @@
     <color name="mainBackgroundColor">#F2F7FF</color>
     <color name="primaryTextColor">#000000</color>
     <color name="secondaryTextColor">#ffffff</color>
+    <color name="alerterBackground">#FF454C</color>
 </resources>

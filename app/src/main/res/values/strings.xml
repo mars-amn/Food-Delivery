@@ -4,4 +4,9 @@
     <string name="main_label">Find Out The \nDrinks you Love</string>
     <string name="favorite_empty_state_first_text">Your favorite list is empty!\n add products to the list\n by pressing the</string>
     <string name="favorite_empty_state_second_text">Button in any product screen</string>
+    <string name="delete_fav_product_dialog_title">Delete Product</string>
+    <string name="delete_fav_product_dialog_positive_button_label">Confirm</string>
+    <string name="delete_fav_product_dialog_negative_button_label">No</string>
+    <string name="delete_fav_product_dialog_message">Are you sure you want to delete the product from your favorite list?</string>
+    <string name="alerter_added_cart_title">Added to cart</string>
 </resources>

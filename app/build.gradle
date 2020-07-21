@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
-
+apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.1"
@@ -48,6 +48,11 @@ dependencies {
     def arch_version = "2.1.0"
     def room_version = "2.2.5"
     def paging_version = "2.1.2"
+    def alerter_version = "6.1.0"
+    /**
+     * firebases
+     */
+    implementation 'com.google.firebase:firebase-analytics-ktx:17.4.4'
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'com.google.android.material:material:1.0.0'
@@ -108,8 +113,19 @@ dependencies {
      */
     implementation "com.github.skydoves:transformationlayout:1.0.4"
 
+    /**
+     * Rating
+     */
     implementation 'com.github.ome450901:SimpleRatingBar:1.5.0'
 
+    /**
+     * transition
+     */
     implementation "com.andkulikov:transitionseverywhere:2.1.0"
+
+    /**
+     * alerter
+     */
+    implementation "com.tapadoo.android:alerter:$alerter_version"
 
 }

@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
             window.insetsController?.hide(WindowInsets.Type.statusBars())
         } else {
             window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN)
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN)
         }
     }
 
@@ -49,7 +49,8 @@ class MainActivity : AppCompatActivity() {
         val navViewBackground = mBinding.navigationView.background as MaterialShapeDrawable
         navViewBackground.shapeAppearanceModel = navViewBackground.shapeAppearanceModel.toBuilder()
             .setTopRightCorner(CornerFamily.ROUNDED, radius)
-            .setBottomRightCorner(CornerFamily.ROUNDED, radius).build()
+            .setBottomRightCorner(CornerFamily.ROUNDED, radius)
+            .build()
     }
 
     private fun onBottomNavClick() {
@@ -63,34 +64,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showFragment(fragment: Fragment, fragmentName: String) {
-
         val fragmentManager = supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.mainContainer, fragment)
-        // 1. Know how many fragments there are in the stack
-        // 1. Know how many fragments there are in the stack
         val count: Int = fragmentManager.backStackEntryCount
-        // 2. If the fragment is **not** "home type", save it to the stack
-        // 2. If the fragment is **not** "home type", save it to the stack
         if (fragmentName == FAVORITE_FRAGMENT) {
             fragmentTransaction.addToBackStack(fragmentName)
         }
-        // Commit !
-        // Commit !
         fragmentTransaction.commit()
-        // 3. After the commit, if the fragment is not an "home type" the back stack is changed, triggering the
-        // OnBackStackChanged callback
-        // 3. After the commit, if the fragment is not an "home type" the back stack is changed, triggering the
-        // OnBackStackChanged callback
+
+        handleOnBackStackChangedCallback(fragmentManager, count)
+    }
+
+    private fun handleOnBackStackChangedCallback(fragmentManager: FragmentManager, count: Int) {
         fragmentManager.addOnBackStackChangedListener(object :
             FragmentManager.OnBackStackChangedListener {
             override fun onBackStackChanged() {
-                // If the stack decreases it means I clicked the back button
                 if (fragmentManager.backStackEntryCount <= count) {
-                    // pop all the fragment and remove the listener
                     fragmentManager.popBackStack(FAVORITE_FRAGMENT, POP_BACK_STACK_INCLUSIVE)
                     fragmentManager.removeOnBackStackChangedListener(this)
-                    // set the home button selected
+
                     mBinding.bottomNavBar.menu.getItem(0).isChecked = true
                 }
             }
@@ -107,11 +100,9 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onBackPressed() {
-        val count = supportFragmentManager.backStackEntryCount
         when {
-            count > 0 -> supportFragmentManager.popBackStack()
-            mBinding.drawerLayout.isDrawerOpen(
-                GravityCompat.START) -> mBinding.drawerLayout.closeDrawer(GravityCompat.START)
+            mBinding.drawerLayout.isDrawerOpen(GravityCompat.START) -> mBinding.drawerLayout.closeDrawer(
+                    GravityCompat.START)
             else -> super.onBackPressed()
         }
     }

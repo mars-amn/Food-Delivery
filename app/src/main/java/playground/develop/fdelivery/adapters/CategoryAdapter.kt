@@ -25,7 +25,6 @@ class CategoryAdapter(private val mContext: Context, private var mCategories: Li
     inner class CategoriesVH(private val mBinding: ListItemCategoryBinding) :
         RecyclerView.ViewHolder(mBinding.root) {
 
-
         fun bind(category: Category) {
             mBinding.category = category
         }

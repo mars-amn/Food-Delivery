@@ -1,14 +1,15 @@
 package playground.develop.fdelivery.di
 
 import androidx.room.Room
+import com.google.firebase.analytics.FirebaseAnalytics
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
-import playground.develop.fdelivery.database.locale.AppDatabase
+import playground.develop.fdelivery.database.local.AppDatabase
 import playground.develop.fdelivery.repository.DataRepository
-import playground.develop.fdelivery.repository.FavoriteProductsRepository
+import playground.develop.fdelivery.repository.LocalDatabaseRepository
 import playground.develop.fdelivery.viewmodel.AppViewModel
-import playground.develop.fdelivery.viewmodel.FavoriteProductsViewModel
+import playground.develop.fdelivery.viewmodel.LocalDatabaseViewModel
 
 val appModules = module {
     single {
@@ -16,8 +17,10 @@ val appModules = module {
             .build()
     }
     single { get<AppDatabase>().favProductsDao() }
+    single { get<AppDatabase>().cartDao() }
+    single { FirebaseAnalytics.getInstance(androidContext()) }
     factory { DataRepository() }
-    factory { FavoriteProductsRepository() }
+    factory { LocalDatabaseRepository() }
     viewModel { AppViewModel() }
-    viewModel { FavoriteProductsViewModel() }
+    viewModel { LocalDatabaseViewModel() }
 }

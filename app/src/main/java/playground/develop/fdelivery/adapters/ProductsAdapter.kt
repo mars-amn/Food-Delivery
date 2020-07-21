@@ -1,18 +1,20 @@
 package playground.develop.fdelivery.adapters
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.skydoves.transformationlayout.TransformationCompat
 import playground.develop.fdelivery.data.Product
 import playground.develop.fdelivery.databinding.ListItemProductsBinding
-import playground.develop.fdelivery.ui.activities.ProductDetailsActivity
 
-class ProductsAdapter(private val mContext: Context, private val mProducts: List<Product>) :
-    RecyclerView.Adapter<ProductsAdapter.ProductsVH>() {
+class ProductsAdapter(private val mListener: ProductClickListener, private val mContext: Context,
+    private val mProducts: List<Product>) : RecyclerView.Adapter<ProductsAdapter.ProductsVH>() {
+    interface ProductClickListener {
+        fun onProductClick(product: Product)
+        fun onCartClick(product: Product)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductsVH {
         val inflater = LayoutInflater.from(mContext)
         val binding = ListItemProductsBinding.inflate(inflater, parent, false)
@@ -31,10 +33,13 @@ class ProductsAdapter(private val mContext: Context, private val mProducts: List
             mBinding.productHandlers = this
         }
 
+        fun onAddToCartClick(v: View) {
+            mListener.onCartClick(mProducts[adapterPosition])
+
+        }
+
         fun onProductClick(v: View) {
-            val intent = Intent(mContext, ProductDetailsActivity::class.java)
-            intent.putExtra("product", mProducts[adapterPosition])
-            TransformationCompat.startActivity(mBinding.transformationLayout, intent)
+            mListener.onProductClick(mProducts[adapterPosition])
         }
 
         fun bind(product: Product) {

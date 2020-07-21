@@ -39,15 +39,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchBar" />
 
-        <com.yarolegovich.discretescrollview.DiscreteScrollView
-            android:id="@+id/productsRecyclerView"
+        <com.skydoves.transformationlayout.TransformationLayout
+            android:id="@+id/transformationLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="@dimen/recyclerview_margin"
-            app:dsv_orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/categoryRecyclerView" />
+            app:layout_constraintTop_toBottomOf="@id/categoryRecyclerView"
+            app:transformation_duration="550">
+
+            <com.yarolegovich.discretescrollview.DiscreteScrollView
+                android:id="@+id/productsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/recyclerview_margin"
+                app:dsv_orientation="horizontal" />
+        </com.skydoves.transformationlayout.TransformationLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

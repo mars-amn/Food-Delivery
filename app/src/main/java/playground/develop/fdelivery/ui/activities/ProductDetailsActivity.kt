@@ -16,14 +16,14 @@ import com.transitionseverywhere.extra.Scale
 import org.koin.android.viewmodel.ext.android.viewModel
 import playground.develop.fdelivery.R
 import playground.develop.fdelivery.data.Product
-import playground.develop.fdelivery.database.locale.favorite.FavProducts
+import playground.develop.fdelivery.database.local.favorite.FavProducts
 import playground.develop.fdelivery.databinding.ActivityProductDetailsBinding
 import playground.develop.fdelivery.utils.Extensions.short
-import playground.develop.fdelivery.viewmodel.FavoriteProductsViewModel
+import playground.develop.fdelivery.viewmodel.LocalDatabaseViewModel
 
 class ProductDetailsActivity : TransformationAppCompatActivity() {
 
-    private val mFavoriteViewModel: FavoriteProductsViewModel by viewModel()
+    private val mFavoriteViewModel: LocalDatabaseViewModel by viewModel()
     private lateinit var mBinding: ActivityProductDetailsBinding
     private lateinit var mProduct: Product
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +31,7 @@ class ProductDetailsActivity : TransformationAppCompatActivity() {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_product_details)
         mBinding.productHandlers = this
         mProduct = intent.getParcelableExtra("product")!!
-        mBinding.productTotalPrice.text = getString(R.string.total_price, mProduct.price.toString())
+        mBinding.productTotalPrice.text = getProductPriceFormatted()
         showFullscreen()
     }
 
@@ -42,11 +42,11 @@ class ProductDetailsActivity : TransformationAppCompatActivity() {
         } else {
             "$count"
         }
-        updateCartCounter(textCount)
+        setCounterTextAndApplyAnimation(textCount)
         updatePrice(getCounterCount())
     }
 
-    private fun updateCartCounter(textCount: String) {
+    private fun setCounterTextAndApplyAnimation(textCount: String) {
         mBinding.counterText.apply {
             visibility = View.GONE
             val set = TransitionSet().addTransition(Scale(0.7f))
@@ -59,21 +59,26 @@ class ProductDetailsActivity : TransformationAppCompatActivity() {
 
     private fun updatePrice(count: Int) {
         if (count == 0) {
-            mBinding.productTotalPrice.text =
-                getString(R.string.total_price, mProduct.price.toString())
+            mBinding.productTotalPrice.text = getProductPriceFormatted()
             return
         }
         val totalPrice = (count * mProduct.price)
+        setTotalPriceTextAndApplyAnimation(totalPrice)
+    }
+
+    private fun getProductPriceFormatted() =
+        getString(R.string.total_price, mProduct.price.toString())
+
+    private fun setTotalPriceTextAndApplyAnimation(totalPrice: Float) {
         mBinding.productTotalPrice.apply {
             visibility = View.GONE
-            val set = TransitionSet().addTransition(Scale(0.7f)).addTransition(Fade())
+            val set = TransitionSet().addTransition(Scale(0.7f))
+                .addTransition(Fade())
                 .setInterpolator(LinearOutSlowInInterpolator())
             TransitionManager.beginDelayedTransition(mBinding.totalPriceParent, set)
             text = getString(R.string.total_price, totalPrice.toString())
             visibility = View.VISIBLE
         }
-
-
     }
 
     private fun getCounterCount(): Int {
@@ -83,7 +88,7 @@ class ProductDetailsActivity : TransformationAppCompatActivity() {
     fun onPlusClick(v: View) {
         val count = getCounterCount() + 1
         val text = "$count"
-        updateCartCounter(text)
+        setCounterTextAndApplyAnimation(text)
         updatePrice(getCounterCount())
     }
 
@@ -92,21 +97,28 @@ class ProductDetailsActivity : TransformationAppCompatActivity() {
     }
 
     fun onFavoriteProduct(v: View) {
-        val favProducts =
-            FavProducts(mProduct.name, mProduct.description, mProduct.image, mProduct.price,
-                mProduct.code)
+        addProductToFavorite(getProductAsFavorite())
+    }
 
-        mFavoriteViewModel.addProductToFavorite(favProducts).observe(this, Observer { id ->
+    private fun addProductToFavorite(product: FavProducts) {
+        mFavoriteViewModel.addProductToFavorite(product).observe(this, Observer { id ->
             short(this, "$id")
         })
     }
+
+    private fun getProductAsFavorite(): FavProducts = FavProducts(mProduct.name,
+            mProduct.description,
+            mProduct.image,
+            mProduct.price,
+            mProduct.code)
+
 
     private fun showFullscreen() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController?.hide(statusBars())
         } else {
             window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN)
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN)
         }
     }
 }
