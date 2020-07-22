@@ -26,47 +26,47 @@ object DataUtils {
         products.add(Product(R.drawable.orange_juice,
                 "Drinky Lemon & Mint Juice",
                 "Made with love and fresh seasonal fruits.",
-                70.55f,
+                6.50f,
                 55))
         products.add(Product(R.drawable.orange_juice,
                 "Drinky Lemon & Mint Juice",
                 "Made with love and fresh seasonal fruits.",
-                7.525f,
+                20.25f,
                 2245))
         products.add(Product(R.drawable.orange_juice,
                 "Drinky Lemon & Mint Juice",
                 "Made with love and fresh seasonal fruits.",
-                7.525f,
+                1.70f,
                 348))
         products.add(Product(R.drawable.orange_juice,
                 "Drinky Lemon & Mint Juice",
                 "Made with love and fresh seasonal fruits.",
-                7.525f,
+                8.20f,
                 543))
         products.add(Product(R.drawable.orange_juice,
                 "Drinky Lemon & Mint Juice",
                 "Made with love and fresh seasonal fruits.",
-                7.525f,
+                66.40f,
                 798))
         products.add(Product(R.drawable.orange_juice,
                 "Drinky Lemon & Mint Juice",
                 "Made with love and fresh seasonal fruits.",
-                7.525f,
+                7f,
                 3512353))
         products.add(Product(R.drawable.orange_juice,
                 "Drinky Lemon & Mint Juice",
                 "Made with love and fresh seasonal fruits.",
-                7.525f,
+                0.4f,
                 7777777))
         products.add(Product(R.drawable.orange_juice,
                 "Drinky Lemon & Mint Juice",
                 "Made with love and fresh seasonal fruits.",
-                7.525f,
+                2.10f,
                 6782))
         products.add(Product(R.drawable.orange_juice,
                 "Drinky Lemon & Mint Juice",
                 "Made with love and fresh seasonal fruits.",
-                7.525f,
+                3.60f,
                 6123))
         return products
     }

@@ -5,14 +5,14 @@
         android:id="@+id/action_home"
         android:enabled="true"
         android:icon="@drawable/ic_home"
-        android:title=""
+        android:title="@string/home_label"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_favorites"
         android:enabled="true"
         android:icon="@drawable/ic_favorite"
-        android:title=""
+        android:title="@string/favorite_label"
         app:showAsAction="ifRoom" />
 
     <item
@@ -24,12 +24,12 @@
         android:id="@+id/action_person"
         android:enabled="true"
         android:icon="@drawable/ic_person"
-        android:title=""
+        android:title="@string/profile_label"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_grid"
         android:enabled="true"
         android:icon="@drawable/ic_grid"
-        android:title=""
+        android:title="@string/grid_label"
         app:showAsAction="ifRoom" />
 </menu>

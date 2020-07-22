@@ -11,4 +11,13 @@
     <string name="alerter_added_cart_title">Added to cart</string>
     <string name="checkout_label">Proceed to checkout</string>
     <string name="cart_text_label">Cart</string>
+    <string name="cart_total_label">Total:</string>
+    <string name="cart_total_text">$%1$s</string>
+    <string name="home_label">Home</string>
+    <string name="favorite_label">Favorite</string>
+    <string name="profile_label">Profile</string>
+    <string name="grid_label">Grid</string>
+    <string name="nav_main_item_group_label">Food Delivery</string>
+    <string name="nav_other_item_group_label">Other</string>
+    <string name="about_food_delivery_menu_label">About Food Delivery</string>
 </resources>

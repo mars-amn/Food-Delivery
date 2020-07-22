@@ -82,7 +82,7 @@
                     android:background="@drawable/main_button_background"
                     android:onClick="@{mainHandlers::onCartButtonClick}"
                     android:scaleType="center"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@id/bottomNavBar"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -92,11 +92,11 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/checkoutText"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:background="@drawable/checkout_button_background"
                     android:onClick="@{mainHandlers::onCheckoutClick}"
                     android:text="@string/checkout_label"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toTopOf="@id/bottomNavBar"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -109,6 +109,8 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:fitsSystemWindows="true"
-            app:headerLayout="@layout/home_nav_header" />
+            app:headerLayout="@layout/home_nav_header"
+            app:itemIconTint="@color/colorPrimary"
+            app:menu="@menu/main_nav_menu" />
     </androidx.drawerlayout.widget.DrawerLayout>
 </layout>

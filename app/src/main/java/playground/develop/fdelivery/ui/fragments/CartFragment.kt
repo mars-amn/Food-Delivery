@@ -14,6 +14,7 @@ import playground.develop.fdelivery.adapters.CartAdapter
 import playground.develop.fdelivery.database.local.cart.CartProducts
 import playground.develop.fdelivery.databinding.FragmentCartBinding
 import playground.develop.fdelivery.viewmodel.LocalDatabaseViewModel
+import java.text.DecimalFormat
 
 class CartFragment : Fragment(), CartAdapter.CartClickListener {
     private lateinit var mBinding: FragmentCartBinding
@@ -31,8 +32,18 @@ class CartFragment : Fragment(), CartAdapter.CartClickListener {
                 // todo: show empty state
             } else {
                 setCartProductsAdapter(list)
+                calculateTheBill(list)
             }
         })
+    }
+
+    private fun calculateTheBill(list: PagedList<CartProducts>) {
+        var total = 0f
+        list.forEach { product ->
+            total += (product.productPrice * product.count)
+        }
+        mBinding.totalPriceText.text =
+            getString(R.string.cart_total_text, DecimalFormat().format(total))
     }
 
     private fun setCartProductsAdapter(list: PagedList<CartProducts>) {
