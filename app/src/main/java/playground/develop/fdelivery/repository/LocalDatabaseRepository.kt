@@ -103,7 +103,7 @@ class LocalDatabaseRepository : KoinComponent {
                 PagedList.Config.Builder()
                     .setPageSize(25)
                     .setEnablePlaceholders(true)
-                    .build()).buildFlowable(BackpressureStrategy.LATEST)
+                    .build()).buildFlowable(BackpressureStrategy.BUFFER)
 
         mDisposables.add(pagedListBuilder.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -113,8 +113,13 @@ class LocalDatabaseRepository : KoinComponent {
         return pagedList
     }
 
+    fun updateProductInCart(product: CartProducts) {
+        mDisposables.add(Observable.fromCallable { mCartDao.updateProductInCart(product) }
+            .subscribeOn(Schedulers.io())
+            .subscribe())
+    }
+
     fun dispose() {
         mDisposables.dispose()
     }
-
 }

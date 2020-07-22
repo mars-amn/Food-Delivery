@@ -112,7 +112,7 @@ class ProductDetailsActivity : TransformationAppCompatActivity() {
             mProduct.price,
             mProduct.code)
 
-
+    @Suppress("deprecation")
     private fun showFullscreen() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController?.hide(statusBars())

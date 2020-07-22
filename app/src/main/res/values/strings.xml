@@ -9,4 +9,6 @@
     <string name="delete_fav_product_dialog_negative_button_label">No</string>
     <string name="delete_fav_product_dialog_message">Are you sure you want to delete the product from your favorite list?</string>
     <string name="alerter_added_cart_title">Added to cart</string>
+    <string name="checkout_label">Proceed to checkout</string>
+    <string name="cart_text_label">Cart</string>
 </resources>

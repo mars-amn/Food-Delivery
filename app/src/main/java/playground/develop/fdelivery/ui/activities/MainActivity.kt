@@ -12,11 +12,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import androidx.fragment.app.FragmentTransaction
+import androidx.interpolator.view.animation.LinearOutSlowInInterpolator
+import androidx.transition.Fade
+import androidx.transition.TransitionManager
+import androidx.transition.TransitionSet
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.skydoves.transformationlayout.onTransformationStartContainer
+import com.transitionseverywhere.extra.Scale
 import playground.develop.fdelivery.R
 import playground.develop.fdelivery.databinding.ActivityMainBinding
+import playground.develop.fdelivery.ui.fragments.CartFragment
 import playground.develop.fdelivery.ui.fragments.FavoriteFragment
 import playground.develop.fdelivery.ui.fragments.HomeFragment
 import playground.develop.fdelivery.utils.Extensions.short
@@ -35,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         showFullscreen()
     }
 
+    @Suppress("deprecation")
     private fun showFullscreen() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController?.hide(WindowInsets.Type.statusBars())
@@ -57,23 +64,31 @@ class MainActivity : AppCompatActivity() {
         mBinding.bottomNavBar.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.action_home -> showFragment(HomeFragment(), HOME_FRAGMENT)
-                R.id.action_favorites -> showFragment(FavoriteFragment(), FAVORITE_FRAGMENT)
+                R.id.action_favorites -> showFragment(FavoriteFragment(), OTHER_FRAGMENT)
             }
             true
         }
     }
 
     private fun showFragment(fragment: Fragment, fragmentName: String) {
+        if (fragment is CartFragment) {
+            showCheckoutButton()
+        } else {
+            hideCheckoutButton()
+        }
+
         val fragmentManager = supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+
         fragmentTransaction.replace(R.id.mainContainer, fragment)
+
         val count: Int = fragmentManager.backStackEntryCount
-        if (fragmentName == FAVORITE_FRAGMENT) {
+        if (fragmentName == OTHER_FRAGMENT) {
             fragmentTransaction.addToBackStack(fragmentName)
         }
         fragmentTransaction.commit()
-
         handleOnBackStackChangedCallback(fragmentManager, count)
+
     }
 
     private fun handleOnBackStackChangedCallback(fragmentManager: FragmentManager, count: Int) {
@@ -81,9 +96,8 @@ class MainActivity : AppCompatActivity() {
             FragmentManager.OnBackStackChangedListener {
             override fun onBackStackChanged() {
                 if (fragmentManager.backStackEntryCount <= count) {
-                    fragmentManager.popBackStack(FAVORITE_FRAGMENT, POP_BACK_STACK_INCLUSIVE)
+                    fragmentManager.popBackStack(OTHER_FRAGMENT, POP_BACK_STACK_INCLUSIVE)
                     fragmentManager.removeOnBackStackChangedListener(this)
-
                     mBinding.bottomNavBar.menu.getItem(0).isChecked = true
                 }
             }
@@ -91,13 +105,41 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onCartButtonClick(v: View) {
-        short(this, "Cart click")
+        showFragment(CartFragment(), OTHER_FRAGMENT)
+    }
+
+    private fun showCheckoutButton() {
+        mBinding.cartButton.visibility = View.GONE
+        mBinding.checkoutText.apply {
+            visibility = View.GONE
+            applyAnimationOnMainParent()
+            visibility = View.VISIBLE
+        }
+    }
+
+    private fun hideCheckoutButton() {
+        mBinding.checkoutText.visibility = View.GONE
+        mBinding.cartButton.apply {
+            visibility = View.GONE
+            applyAnimationOnMainParent()
+            visibility = View.VISIBLE
+        }
+    }
+
+    private fun applyAnimationOnMainParent() {
+        val set = TransitionSet().addTransition(Scale(0.7f))
+            .addTransition(Fade())
+            .setInterpolator(LinearOutSlowInInterpolator())
+        TransitionManager.beginDelayedTransition(mBinding.mainActivityParent, set)
+    }
+
+    fun onCheckoutClick(v: View) {
+        short(this, "checkout click")
     }
 
     fun onNavDrawerClick(v: View) {
         mBinding.drawerLayout.openDrawer(GravityCompat.START)
     }
-
 
     override fun onBackPressed() {
         when {
@@ -109,6 +151,6 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         const val HOME_FRAGMENT = "HomeFragment"
-        const val FAVORITE_FRAGMENT = "FavoriteFragment"
+        const val OTHER_FRAGMENT = "OtherFragment"
     }
 }

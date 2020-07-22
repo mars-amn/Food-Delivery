@@ -17,4 +17,7 @@ interface CartDao {
 
     @Delete
     fun deleteProductOfCart(product: CartProducts): Int
+
+    @Update
+    fun updateProductInCart(product: CartProducts)
 }

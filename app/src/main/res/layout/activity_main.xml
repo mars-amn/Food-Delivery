@@ -23,6 +23,7 @@
             android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/mainActivityParent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/mainBackgroundColor">
@@ -81,11 +82,24 @@
                     android:background="@drawable/main_button_background"
                     android:onClick="@{mainHandlers::onCartButtonClick}"
                     android:scaleType="center"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="@id/bottomNavBar"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:srcCompat="@drawable/ic_shopping_basket"
                     app:useCompatPadding="true" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/checkoutText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/checkout_button_background"
+                    android:onClick="@{mainHandlers::onCheckoutClick}"
+                    android:text="@string/checkout_label"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@id/bottomNavBar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

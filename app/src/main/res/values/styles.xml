@@ -36,4 +36,13 @@
         <item name="android:textSize">@dimen/favorite_empty_state_first_size</item>
     </style>
 
+    <style name="MainTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/main_text_label_margin_start</item>
+        <item name="android:fontFamily">@font/baloo</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Title</item>
+        <item name="android:textSize">@dimen/main_text_label_size</item>
+    </style>
+
 </resources>

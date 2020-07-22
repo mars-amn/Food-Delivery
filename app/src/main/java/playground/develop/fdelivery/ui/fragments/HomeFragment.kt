@@ -22,6 +22,7 @@ import playground.develop.fdelivery.database.local.cart.CartProducts
 import playground.develop.fdelivery.databinding.FragmentHomeBinding
 import playground.develop.fdelivery.ui.activities.ProductDetailsActivity
 import playground.develop.fdelivery.ui.analytics.AnalyticLogger
+import playground.develop.fdelivery.utils.Extensions.short
 import playground.develop.fdelivery.viewmodel.AppViewModel
 import playground.develop.fdelivery.viewmodel.LocalDatabaseViewModel
 
@@ -94,6 +95,7 @@ class HomeFragment : Fragment(), ProductsAdapter.ProductClickListener {
 
     private fun addProductToCart(cartProduct: CartProducts) {
         mDatabaseViewModel.addToCart(cartProduct).observe(this, Observer { code ->
+            short(context!!, "Code: ==== $code")
             showAddToCartAlerter()
         })
     }

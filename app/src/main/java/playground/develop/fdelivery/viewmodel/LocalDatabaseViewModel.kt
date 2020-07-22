@@ -36,6 +36,10 @@ class LocalDatabaseViewModel : ViewModel(), KoinComponent {
         mRepository.deleteProductOfCart(product)
     }
 
+    fun updateProductInCart(product: CartProducts) {
+        mRepository.updateProductInCart(product)
+    }
+
     override fun onCleared() {
         super.onCleared()
         mRepository.dispose()
