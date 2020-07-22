@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.activities.CheckoutActivity">
+
+        <TextView
+            android:id="@+id/summaryLabel"
+            style="@style/MainTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/order_summary_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/userPayPriceLabel"
+            style="@style/CheckoutLabelsStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You Pay:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/summaryLabel" />
+
+        <TextView
+            android:id="@+id/paymentPriceText"
+            style="@style/CheckoutLabelsStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/price_checkout_text_background"
+            android:text="$600"
+            app:layout_constraintBottom_toBottomOf="@+id/userPayPriceLabel"
+            app:layout_constraintStart_toEndOf="@id/userPayPriceLabel"
+            app:layout_constraintTop_toTopOf="@id/userPayPriceLabel" />
+
+        <TextView
+            android:id="@+id/forProductLabel"
+            style="@style/CheckoutLabelsStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="For:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/userPayPriceLabel" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/checkoutProductsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/forProductLabel" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

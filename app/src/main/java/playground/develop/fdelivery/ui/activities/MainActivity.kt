@@ -1,5 +1,6 @@
 package playground.develop.fdelivery.ui.activities
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -22,10 +23,10 @@ import com.skydoves.transformationlayout.onTransformationStartContainer
 import com.transitionseverywhere.extra.Scale
 import playground.develop.fdelivery.R
 import playground.develop.fdelivery.databinding.ActivityMainBinding
+import playground.develop.fdelivery.ui.analytics.AnalyticLogger
 import playground.develop.fdelivery.ui.fragments.CartFragment
 import playground.develop.fdelivery.ui.fragments.FavoriteFragment
 import playground.develop.fdelivery.ui.fragments.HomeFragment
-import playground.develop.fdelivery.utils.Extensions.short
 
 
 class MainActivity : AppCompatActivity() {
@@ -134,7 +135,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onCheckoutClick(v: View) {
-        short(this, "checkout click")
+        AnalyticLogger.onUserClickOnCheckout()
+        startActivity(Intent(this, CheckoutActivity::class.java))
     }
 
     fun onNavDrawerClick(v: View) {

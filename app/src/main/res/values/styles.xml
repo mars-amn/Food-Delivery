@@ -45,4 +45,7 @@
         <item name="android:textSize">@dimen/main_text_label_size</item>
     </style>
 
+    <style name="CheckoutLabelsStyle" parent="MainTextStyle">
+        <item name="android:textSize">25sp</item>
+    </style>
 </resources>

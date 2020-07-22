@@ -14,6 +14,12 @@ object AnalyticLogger : KoinComponent {
         })
     }
 
+    fun onUserClickOnCheckout() {
+        mAnalytics.logEvent(USER_CLICK_ON_CHECKOUT, Bundle().apply {
+            putBoolean(USER_CLICK_ON_CHECKOUT, true)
+        })
+    }
+
     fun onUserClickOnAddToCart() {
         mAnalytics.logEvent(USER_CLICK_ON_ADD_TO_CART, Bundle().apply {
             putBoolean(USER_CLICK_ON_ADD_TO_CART, true)
@@ -21,5 +27,6 @@ object AnalyticLogger : KoinComponent {
     }
 
     private const val USER_CLICK_ON_PRODUCT = "user_click_product"
+    private const val USER_CLICK_ON_CHECKOUT = "user_click_checkout"
     private const val USER_CLICK_ON_ADD_TO_CART = "user_click_add_to_cart"
 }
