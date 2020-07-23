@@ -1,59 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <variable
+            name="deliveryHandlers"
+            type="playground.develop.fdelivery.ui.activities.CheckoutActivity" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.activities.CheckoutActivity">
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
-            android:id="@+id/summaryLabel"
-            style="@style/MainTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/order_summary_label"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/userPayPriceLabel"
-            style="@style/CheckoutLabelsStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="You Pay:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/summaryLabel" />
-
-        <TextView
-            android:id="@+id/paymentPriceText"
-            style="@style/CheckoutLabelsStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/price_checkout_text_background"
-            android:text="$600"
-            app:layout_constraintBottom_toBottomOf="@+id/userPayPriceLabel"
-            app:layout_constraintStart_toEndOf="@id/userPayPriceLabel"
-            app:layout_constraintTop_toTopOf="@id/userPayPriceLabel" />
-
-        <TextView
-            android:id="@+id/forProductLabel"
-            style="@style/CheckoutLabelsStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="For:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userPayPriceLabel" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/checkoutProductsRecyclerView"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/forProductLabel" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/summaryLabel"
+                style="@style/MainTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/order_summary_label"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/userPayPriceLabel"
+                style="@style/CheckoutLabelsStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/you_pay_label"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/summaryLabel" />
+
+            <TextView
+                android:id="@+id/paymentPriceText"
+                style="@style/CheckoutLabelsStyle"
+                android:background="@drawable/price_checkout_text_background"
+                android:text="$600"
+                app:layout_constraintBottom_toBottomOf="@+id/userPayPriceLabel"
+                app:layout_constraintStart_toEndOf="@id/userPayPriceLabel"
+                app:layout_constraintTop_toTopOf="@id/userPayPriceLabel" />
+
+            <TextView
+                android:id="@+id/forProductLabel"
+                style="@style/CheckoutLabelsStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/for_label"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/userPayPriceLabel" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/checkoutProductsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/forProductLabel" />
+
+            <TextView
+                android:id="@+id/deliveryDetailsLabel"
+                style="@style/CheckoutLabelsStyle"
+                android:text="@string/delivery_details_label"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/checkoutProductsRecyclerView" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/deliveryDetailsNameInputField"
+                style="@style/InputFieldStyle"
+                android:hint="@string/delivery_txt_input_name_hint"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/deliveryDetailsLabel" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/deliveryDetailsAddressInputField"
+                style="@style/InputFieldStyle"
+                android:hint="@string/delivery_txt_input_address_hint"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/deliveryDetailsNameInputField" />
+
+            <TextView
+                android:id="@+id/deliveryPaymentLabel"
+                style="@style/CheckoutLabelsStyle"
+                android:text="@string/payment_options_label"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/deliveryDetailsAddressInputField" />
+
+            <LinearLayout
+                android:id="@+id/cashPaymentParent"
+                style="@style/PaymentOptionStyle"
+                android:onClick="@{deliveryHandlers::onCashSelect}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/deliveryPaymentLabel">
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/paymentCashRadio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:onClick="@{deliveryHandlers::onCashSelect}" />
+
+                <TextView
+                    android:id="@+id/cashLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/baloo"
+                    android:onClick="@{deliveryHandlers::onCashSelect}"
+                    android:text="@string/cash_label"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/creditCardPaymentParent"
+                style="@style/PaymentOptionStyle"
+                android:onClick="@{deliveryHandlers::onCreditCardSelect}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/deliveryPaymentLabel">
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/paymentCreditCardRadio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:onClick="@{deliveryHandlers::onCreditCardSelect}" />
+
+                <TextView
+                    android:id="@+id/creditCardLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/baloo"
+                    android:onClick="@{deliveryHandlers::onCreditCardSelect}"
+                    android:text="@string/credit_card_label"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/order_button_margin"
+                android:layout_marginTop="@dimen/order_button_margin_bottom"
+                android:layout_marginEnd="@dimen/order_button_margin"
+                android:layout_marginBottom="@dimen/order_button_margin_bottom"
+                android:background="@drawable/checkout_button_background"
+                android:text="@string/order_button_label"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cashPaymentParent"
+                app:layout_constraintVertical_bias="1.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

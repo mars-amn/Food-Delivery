@@ -21,4 +21,13 @@
     <string name="nav_other_item_group_label">Other</string>
     <string name="about_food_delivery_menu_label">About Food Delivery</string>
     <string name="order_summary_label">Order Summary</string>
+    <string name="delivery_txt_input_name_hint">Name</string>
+    <string name="delivery_txt_input_address_hint">Delivery Address</string>
+    <string name="you_pay_label">You Pay:</string>
+    <string name="for_label">For:</string>
+    <string name="delivery_details_label">Delivery Details:</string>
+    <string name="payment_options_label">Pay with:</string>
+    <string name="cash_label">Cash</string>
+    <string name="credit_card_label">Credit Card</string>
+    <string name="order_button_label">Order</string>
 </resources>

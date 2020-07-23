@@ -48,4 +48,24 @@
     <style name="CheckoutLabelsStyle" parent="MainTextStyle">
         <item name="android:textSize">25sp</item>
     </style>
+
+    <style name="InputFieldStyle">
+        <item name="android:fontFamily">@font/baloo</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/delivery_txt_input_name_height</item>
+        <item name="android:layout_margin">@dimen/delivery_txt_input_name_margin</item>
+        <item name="android:background">@drawable/input_field_background</item>
+        <item name="android:inputType">textPersonName</item>
+        <item name="android:padding">@dimen/delivery_txt_input_name_padding</item>
+        <item name="android:textColorHint">@color/primaryTextColor</item>
+    </style>
+
+    <style name="PaymentOptionStyle">
+        <item name="android:layout_width">@dimen/payment_option_parent_width</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/payment_option_parent_margin</item>
+        <item name="android:background">@drawable/payment_parent_background</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">@dimen/payment_option_parent_padding</item>
+    </style>
 </resources>

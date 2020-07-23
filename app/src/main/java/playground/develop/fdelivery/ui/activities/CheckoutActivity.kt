@@ -1,6 +1,7 @@
 package playground.develop.fdelivery.ui.activities
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -19,7 +20,7 @@ class CheckoutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_checkout)
-
+        mBinding.deliveryHandlers = this
         loadCartProducts()
     }
 
@@ -28,6 +29,7 @@ class CheckoutActivity : AppCompatActivity() {
             if (list.isNotEmpty() || list != null) {
                 addAdapterToRecyclerView(list)
             } else {
+                finish()
 
             }
         })
@@ -48,4 +50,30 @@ class CheckoutActivity : AppCompatActivity() {
         mBinding.paymentPriceText.text =
             getString(R.string.cart_total_text, DecimalFormat().format(total))
     }
+
+    fun onCashSelect(v: View) {
+        if (isCreditSelect()) {
+            setCashChecked()
+        }
+    }
+
+    fun onCreditCardSelect(v: View) {
+        if (isCashSelect()) {
+            setCreditCardChecked()
+        }
+    }
+
+    private fun setCashChecked() {
+        mBinding.paymentCashRadio.isChecked = true
+        mBinding.paymentCreditCardRadio.isChecked = false
+    }
+
+    private fun setCreditCardChecked() {
+        mBinding.paymentCashRadio.isChecked = false
+        mBinding.paymentCreditCardRadio.isChecked = true
+    }
+
+    private fun isCreditSelect(): Boolean = mBinding.paymentCreditCardRadio.isChecked
+    private fun isCashSelect(): Boolean = mBinding.paymentCashRadio.isChecked
+
 }
