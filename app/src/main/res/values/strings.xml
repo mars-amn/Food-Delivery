@@ -1,4 +1,11 @@
 <resources>
+    <string-array name="food_categories">
+        <item>Pizza</item>
+        <item>Shawarma</item>
+        <item>Crepe</item>
+        <item>Desserts</item>
+        <item>Refreshments</item>
+    </string-array>
     <string name="app_name">Delivery</string>
     <string name="total_price">$%1$s</string>
     <string name="main_label">Find Out The \nDrinks you Love</string>
