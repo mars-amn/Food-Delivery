@@ -1,14 +1,11 @@
 package playground.develop.fdelivery.data
 
 import android.os.Parcelable
-import androidx.annotation.DrawableRes
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 
-data class Product(@DrawableRes val image: Int, val name: String, val description: String,
-    val price: Float,
-    /**
-     * should be unique code that identifies the product & its details
-     */
-    val code: Long) : Parcelable
+data class Product(var name: String, var description: String, var price: Float, var code: Int,
+    var image: String) : Parcelable {
+    constructor() : this("", "", 0f, 0, "")
+}

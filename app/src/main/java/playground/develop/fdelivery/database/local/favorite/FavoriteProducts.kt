@@ -10,9 +10,9 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "FavoriteProducts")
 data class FavProducts(@ColumnInfo(name = "product_name") var productName: String,
     @ColumnInfo(name = "product_description") var productDescription: String,
-    @ColumnInfo(name = "product_image") var productImage: Int,
     @ColumnInfo(name = "product_price") var productPrice: Float,
-    @PrimaryKey @ColumnInfo(name = "product_code") var code: Long) {
+    @PrimaryKey @ColumnInfo(name = "product_code") var code: Long,
+    @ColumnInfo(name = "product_image") var productImage: String) {
     override fun equals(other: Any?): Boolean {
         if (other == null || other !is FavProducts) return false
         return productName == other.productName && code == other.code

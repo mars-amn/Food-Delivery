@@ -37,4 +37,7 @@
     <string name="cash_label">Cash</string>
     <string name="credit_card_label">Credit Card</string>
     <string name="order_button_label">Order</string>
+    <string name="select_category_search_filter_title">Select Category:</string>
+    <string name="select_category_search_filter_button_label">Confirm</string>
+    <string name="add_to_cart_label">Add to Cart</string>
 </resources>

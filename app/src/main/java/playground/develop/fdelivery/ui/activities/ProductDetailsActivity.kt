@@ -11,15 +11,20 @@ import androidx.lifecycle.Observer
 import androidx.transition.Fade
 import androidx.transition.TransitionManager
 import androidx.transition.TransitionSet
+import coil.api.load
 import com.skydoves.transformationlayout.TransformationAppCompatActivity
+import com.tapadoo.alerter.Alerter
 import com.transitionseverywhere.extra.Scale
 import org.koin.android.viewmodel.ext.android.viewModel
 import playground.develop.fdelivery.R
 import playground.develop.fdelivery.data.Product
+import playground.develop.fdelivery.database.local.cart.CartProducts
 import playground.develop.fdelivery.database.local.favorite.FavProducts
 import playground.develop.fdelivery.databinding.ActivityProductDetailsBinding
+import playground.develop.fdelivery.ui.analytics.AnalyticLogger
 import playground.develop.fdelivery.utils.Extensions.short
 import playground.develop.fdelivery.viewmodel.LocalDatabaseViewModel
+import java.text.DecimalFormat
 
 class ProductDetailsActivity : TransformationAppCompatActivity() {
 
@@ -31,7 +36,7 @@ class ProductDetailsActivity : TransformationAppCompatActivity() {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_product_details)
         mBinding.productHandlers = this
         mProduct = intent.getParcelableExtra("product")!!
-        mBinding.productTotalPrice.text = getProductPriceFormatted()
+        setProductDetails()
         showFullscreen()
     }
 
@@ -66,6 +71,13 @@ class ProductDetailsActivity : TransformationAppCompatActivity() {
         setTotalPriceTextAndApplyAnimation(totalPrice)
     }
 
+    private fun setProductDetails() {
+        mBinding.productName.text = mProduct.name
+        mBinding.productImage.load(mProduct.image) { crossfade(true) }
+        mBinding.descriptionText.text = mProduct.description
+        mBinding.productTotalPrice.text = getProductPriceFormatted()
+    }
+
     private fun getProductPriceFormatted() =
         getString(R.string.total_price, mProduct.price.toString())
 
@@ -76,7 +88,7 @@ class ProductDetailsActivity : TransformationAppCompatActivity() {
                 .addTransition(Fade())
                 .setInterpolator(LinearOutSlowInInterpolator())
             TransitionManager.beginDelayedTransition(mBinding.totalPriceParent, set)
-            text = getString(R.string.total_price, totalPrice.toString())
+            text = getString(R.string.total_price, DecimalFormat().format(totalPrice))
             visibility = View.VISIBLE
         }
     }
@@ -106,11 +118,42 @@ class ProductDetailsActivity : TransformationAppCompatActivity() {
         })
     }
 
+    fun onAddCartClick(v: View) {
+        logProductAddedToCart()
+        addProductToCart()
+    }
+
+    private fun addProductToCart() {
+        mFavoriteViewModel.addToCart(getProductAsCartProduct()).observe(this, Observer { id ->
+            showAddedCartAlerter()
+        })
+    }
+
+    private fun showAddedCartAlerter() {
+        Alerter.create(this)
+            .setTitle(getString(R.string.alerter_added_cart_title))
+            .setIcon(R.drawable.ic_shopping_basket)
+            .setBackgroundColorRes(R.color.alerterBackground)
+            .setDuration(2000)
+            .show()
+    }
+
+    private fun getProductAsCartProduct() = CartProducts(mProduct.name,
+            mProduct.description,
+            mProduct.price,
+            mProduct.code.toLong(),
+            mProduct.image,
+            getCounterCount())
+
+    private fun logProductAddedToCart() {
+        AnalyticLogger.onUserClickOnAddToCart()
+    }
+
     private fun getProductAsFavorite(): FavProducts = FavProducts(mProduct.name,
             mProduct.description,
-            mProduct.image,
             mProduct.price,
-            mProduct.code)
+            mProduct.code.toLong(),
+            mProduct.image)
 
     @Suppress("deprecation")
     private fun showFullscreen() {

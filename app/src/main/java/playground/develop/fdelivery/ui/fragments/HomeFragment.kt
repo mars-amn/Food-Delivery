@@ -9,6 +9,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.mancj.materialsearchbar.MaterialSearchBar
 import com.skydoves.transformationlayout.TransformationCompat
 import com.tapadoo.alerter.Alerter
 import com.yarolegovich.discretescrollview.transform.ScaleTransformer
@@ -22,11 +24,11 @@ import playground.develop.fdelivery.database.local.cart.CartProducts
 import playground.develop.fdelivery.databinding.FragmentHomeBinding
 import playground.develop.fdelivery.ui.activities.ProductDetailsActivity
 import playground.develop.fdelivery.ui.analytics.AnalyticLogger
-import playground.develop.fdelivery.utils.Extensions.short
 import playground.develop.fdelivery.viewmodel.AppViewModel
 import playground.develop.fdelivery.viewmodel.LocalDatabaseViewModel
 
-class HomeFragment : Fragment(), ProductsAdapter.ProductClickListener {
+class HomeFragment : Fragment(), ProductsAdapter.ProductClickListener,
+    CategoryAdapter.CategoryClickListener, MaterialSearchBar.OnSearchActionListener {
 
     private lateinit var mBinding: FragmentHomeBinding
     private val mAppViewModel: AppViewModel by viewModel()
@@ -34,13 +36,21 @@ class HomeFragment : Fragment(), ProductsAdapter.ProductClickListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        mBinding.handlers = this
+        mBinding.searchBar.setOnSearchActionListener(this)
         loadCategories()
-        loadProducts()
+        loadProducts("pizza")
         return mBinding.root
     }
 
-    private fun loadProducts() {
-        mAppViewModel.loadProducts().observe(this, Observer { products ->
+    private fun loadProducts(category: String) {
+        mAppViewModel.loadProducts(category).observe(this, Observer { products ->
+            setProductsAdapter(ProductsAdapter(this, context!!, products))
+        })
+    }
+
+    override fun onCategoryClick(category: String) {
+        mAppViewModel.loadProducts(category).observe(this, Observer { products ->
             setProductsAdapter(ProductsAdapter(this, context!!, products))
         })
     }
@@ -60,7 +70,7 @@ class HomeFragment : Fragment(), ProductsAdapter.ProductClickListener {
 
     private fun loadCategories() {
         mAppViewModel.loadCategories().observe(this, Observer { list ->
-            setCategoriesAdapter(CategoryAdapter(context!!, list))
+            setCategoriesAdapter(CategoryAdapter(this@HomeFragment, context!!, list))
         })
     }
 
@@ -95,7 +105,6 @@ class HomeFragment : Fragment(), ProductsAdapter.ProductClickListener {
 
     private fun addProductToCart(cartProduct: CartProducts) {
         mDatabaseViewModel.addToCart(cartProduct).observe(this, Observer { code ->
-            short(context!!, "Code: ==== $code")
             showAddToCartAlerter()
         })
     }
@@ -114,9 +123,50 @@ class HomeFragment : Fragment(), ProductsAdapter.ProductClickListener {
     }
 
     private fun getProductAsCartProduct(product: Product) = CartProducts(product.name,
-            product.price,
-            product.image,
             product.description,
-            1,
-            product.code)
+            product.price,
+            product.code.toLong(),
+            product.image,
+            1)
+
+    fun onFilterClick(v: View) {
+        showSelectionDialog()
+    }
+
+    private var categorySelectedPosition = -1
+    private var mSearchCriteria = "pizza"
+
+    private fun getSelectedCategory(): String =
+        resources.getStringArray(R.array.food_categories)[categorySelectedPosition].toLowerCase()
+
+    private fun showSelectionDialog() {
+        MaterialAlertDialogBuilder(context!!).setTitle(getString(R.string.select_category_search_filter_title))
+            .setSingleChoiceItems(resources.getStringArray(R.array.food_categories),
+                    if (categorySelectedPosition == -1) 0 else categorySelectedPosition) { dialog, which ->
+                categorySelectedPosition = which
+                mSearchCriteria = getSelectedCategory()
+            }
+            .setPositiveButton(getString(R.string.select_category_search_filter_button_label)) { dialog, which ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    override fun onButtonClicked(buttonCode: Int) {
+
+    }
+
+    override fun onSearchStateChanged(enabled: Boolean) {
+    }
+
+    override fun onSearchConfirmed(text: CharSequence?) {
+        mAppViewModel.searchFor(text.toString().toLowerCase(), mSearchCriteria)
+            .observe(this, Observer { results ->
+                if (results.isNotEmpty() && results != null) {
+                    setProductsAdapter(ProductsAdapter(this, context!!, results))
+                }
+            })
+    }
+
+
 }

@@ -15,12 +15,20 @@ class AppViewModel : ViewModel(), KoinComponent {
         return mRepository.getCategories()
     }
 
-    fun loadProducts(): LiveData<List<Product>> {
-        return mRepository.getProducts()
-    }
+    //    fun loadProducts(): LiveData<List<Product>> {
+    //        return mRepository.getProducts()
+    //    }
 
     override fun onCleared() {
         super.onCleared()
         mRepository.dispose()
+    }
+
+    fun loadProducts(category: String): LiveData<List<Product>> {
+        return mRepository.getProducts(category)
+    }
+
+    fun searchFor(query: String, category: String): LiveData<List<Product>> {
+        return mRepository.searchFor(query, category)
     }
 }

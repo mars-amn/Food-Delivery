@@ -50,9 +50,10 @@ dependencies {
     def paging_version = "2.1.2"
     def alerter_version = "6.1.0"
     /**
-     * firebases
+     * Firebase
      */
     implementation 'com.google.firebase:firebase-analytics-ktx:17.4.4'
+    implementation 'com.google.firebase:firebase-firestore-ktx:21.5.0'
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'com.google.android.material:material:1.0.0'

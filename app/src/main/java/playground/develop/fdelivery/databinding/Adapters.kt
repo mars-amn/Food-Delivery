@@ -9,14 +9,20 @@ import coil.transform.CircleCropTransformation
 object Adapters {
     @BindingAdapter("loadImage")
     @JvmStatic
-    fun loadImage(image: ImageView, icon: Int) {
-        image.load(icon)
+    fun loadImage(image: ImageView, url: String) {
+        image.load(url)
+    }
+
+    @BindingAdapter("loadCategory")
+    @JvmStatic
+    fun loadImage(image: ImageView, url: Int) {
+        image.load(url)
     }
 
     @BindingAdapter("loadCartImage")
     @JvmStatic
-    fun loadCartImage(image: ImageView, icon: Int) {
-        image.load(icon) {
+    fun loadCartImage(image: ImageView, url: String) {
+        image.load(url) {
             crossfade(true)
             transformations(CircleCropTransformation())
         }

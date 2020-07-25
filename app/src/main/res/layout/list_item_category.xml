@@ -4,6 +4,10 @@
     <data>
 
         <variable
+            name="handlers"
+            type="playground.develop.fdelivery.adapters.CategoryAdapter.CategoriesVH" />
+
+        <variable
             name="category"
             type="playground.develop.fdelivery.data.Category" />
     </data>
@@ -13,6 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="@dimen/list_item_categories_parent_height"
         android:layout_margin="@dimen/list_item_categories_parent_margin"
+        android:onClick="@{handlers::onCategoryClick}"
         app:cardCornerRadius="@dimen/list_item_categories_parent_radius"
         app:cardElevation="@dimen/common_elevation">
 
@@ -25,9 +30,10 @@
                 android:id="@+id/listItemCategoryImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/category_background"
+                android:layout_gravity="center"
                 android:src="@drawable/ic_orange"
-                app:loadImage="@{category.icon}" />
+                android:background="@drawable/category_background"
+                app:loadCategory="@{category.icon}" />
 
             <TextView
                 android:id="@+id/listItemCategoryName"
