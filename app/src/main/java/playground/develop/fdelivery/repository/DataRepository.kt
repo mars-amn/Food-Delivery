@@ -11,7 +11,13 @@ import io.reactivex.schedulers.Schedulers
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import playground.develop.fdelivery.data.Category
-import playground.develop.fdelivery.data.Product
+import playground.develop.fdelivery.database.remote.Order
+import playground.develop.fdelivery.database.remote.Product
+import playground.develop.fdelivery.utils.Constants.ORDER_ADDRESS
+import playground.develop.fdelivery.utils.Constants.ORDER_ID
+import playground.develop.fdelivery.utils.Constants.ORDER_PRODUCTS
+import playground.develop.fdelivery.utils.Constants.ORDER_STATUS
+import playground.develop.fdelivery.utils.Constants.ORDER_USER_NAME
 import playground.develop.fdelivery.utils.DataUtils
 
 class DataRepository : KoinComponent {
@@ -72,5 +78,26 @@ class DataRepository : KoinComponent {
                 }
             }
         return products
+    }
+
+    fun createOrder(order: Order): LiveData<Boolean> {
+        val orderSubmittingStatus = MutableLiveData<Boolean>()
+        mDB.collection("orders")
+            .document(order.orderId.toString())
+            .set(getMappedOrder(order))
+            .addOnCompleteListener {
+                orderSubmittingStatus.value = it.isSuccessful
+            }
+        return orderSubmittingStatus
+    }
+
+    private fun getMappedOrder(order: Order): HashMap<String, Any> {
+        val map = HashMap<String, Any>()
+        map[ORDER_PRODUCTS] = order.products
+        map[ORDER_USER_NAME] = order.name
+        map[ORDER_ADDRESS] = order.address
+        map[ORDER_STATUS] = order.status
+        map[ORDER_ID] = order.orderId
+        return map
     }
 }

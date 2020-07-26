@@ -1,4 +1,4 @@
-package playground.develop.fdelivery.data
+package playground.develop.fdelivery.database.remote
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

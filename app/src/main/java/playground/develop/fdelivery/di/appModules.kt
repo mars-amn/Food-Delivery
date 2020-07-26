@@ -2,6 +2,7 @@ package playground.develop.fdelivery.di
 
 import androidx.room.Room
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import org.koin.android.ext.koin.androidContext
@@ -26,4 +27,5 @@ val appModules = module {
     viewModel { AppViewModel() }
     viewModel { LocalDatabaseViewModel() }
     factory { Firebase.firestore }
+    factory { FirebaseAuth.getInstance() }
 }

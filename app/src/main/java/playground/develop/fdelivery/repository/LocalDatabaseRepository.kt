@@ -119,7 +119,14 @@ class LocalDatabaseRepository : KoinComponent {
             .subscribe())
     }
 
+    fun nukeCart() {
+        mDisposables.add(Observable.fromCallable { mCartDao.nukeCart() }
+            .subscribeOn(Schedulers.io())
+            .subscribe())
+    }
+
     fun dispose() {
         mDisposables.dispose()
     }
+
 }

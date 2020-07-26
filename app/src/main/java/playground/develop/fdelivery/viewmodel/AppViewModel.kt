@@ -5,7 +5,8 @@ import androidx.lifecycle.ViewModel
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import playground.develop.fdelivery.data.Category
-import playground.develop.fdelivery.data.Product
+import playground.develop.fdelivery.database.remote.Order
+import playground.develop.fdelivery.database.remote.Product
 import playground.develop.fdelivery.repository.DataRepository
 
 class AppViewModel : ViewModel(), KoinComponent {
@@ -14,10 +15,6 @@ class AppViewModel : ViewModel(), KoinComponent {
     fun loadCategories(): LiveData<List<Category>> {
         return mRepository.getCategories()
     }
-
-    //    fun loadProducts(): LiveData<List<Product>> {
-    //        return mRepository.getProducts()
-    //    }
 
     override fun onCleared() {
         super.onCleared()
@@ -30,5 +27,9 @@ class AppViewModel : ViewModel(), KoinComponent {
 
     fun searchFor(query: String, category: String): LiveData<List<Product>> {
         return mRepository.searchFor(query, category)
+    }
+
+    fun createOrder(order: Order): LiveData<Boolean> {
+        return mRepository.createOrder(order)
     }
 }

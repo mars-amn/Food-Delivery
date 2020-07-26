@@ -158,6 +158,7 @@
                 android:layout_marginBottom="@dimen/order_button_margin_bottom"
                 android:background="@drawable/checkout_button_background"
                 android:text="@string/order_button_label"
+                android:onClick="@{deliveryHandlers::onOrderClick}"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

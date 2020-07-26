@@ -40,4 +40,14 @@
     <string name="select_category_search_filter_title">Select Category:</string>
     <string name="select_category_search_filter_button_label">Confirm</string>
     <string name="add_to_cart_label">Add to Cart</string>
+    <string name="client">clientid</string>
+    <string name="order_submit_success_message">Order submitted successfully</string>
+    <string name="order_submit_success_title">Success!</string>
+    <string name="order_submit_success_button">Great</string>
+    <string name="auth_success">Authentication success! / getting your order ready</string>
+    <string name="auth_failed">Authentication failure!</string>
+    <string name="auth_required_dialog_title">Authentication Required</string>
+    <string name="auth_required_dialog_message">In order to proceed with your delivery you should register</string>
+    <string name="auth_required_dialog_positive_button">Ok</string>
+    <string name="auth_required_dialog_negative_button">Never mind</string>
 </resources>

@@ -45,4 +45,8 @@ class LocalDatabaseViewModel : ViewModel(), KoinComponent {
         mRepository.dispose()
     }
 
+    fun nukeCart() {
+        mRepository.nukeCart()
+    }
+
 }

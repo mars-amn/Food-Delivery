@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import playground.develop.fdelivery.data.Product
+import playground.develop.fdelivery.database.remote.Product
 import playground.develop.fdelivery.databinding.ListItemProductsBinding
 
 class ProductsAdapter(private val mListener: ProductClickListener, private val mContext: Context,

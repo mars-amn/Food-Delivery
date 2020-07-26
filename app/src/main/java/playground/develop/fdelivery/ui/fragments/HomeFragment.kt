@@ -19,8 +19,8 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import playground.develop.fdelivery.R
 import playground.develop.fdelivery.adapters.CategoryAdapter
 import playground.develop.fdelivery.adapters.ProductsAdapter
-import playground.develop.fdelivery.data.Product
 import playground.develop.fdelivery.database.local.cart.CartProducts
+import playground.develop.fdelivery.database.remote.Product
 import playground.develop.fdelivery.databinding.FragmentHomeBinding
 import playground.develop.fdelivery.ui.activities.ProductDetailsActivity
 import playground.develop.fdelivery.ui.analytics.AnalyticLogger

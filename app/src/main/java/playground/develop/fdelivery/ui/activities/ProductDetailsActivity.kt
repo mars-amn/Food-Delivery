@@ -17,9 +17,9 @@ import com.tapadoo.alerter.Alerter
 import com.transitionseverywhere.extra.Scale
 import org.koin.android.viewmodel.ext.android.viewModel
 import playground.develop.fdelivery.R
-import playground.develop.fdelivery.data.Product
 import playground.develop.fdelivery.database.local.cart.CartProducts
 import playground.develop.fdelivery.database.local.favorite.FavProducts
+import playground.develop.fdelivery.database.remote.Product
 import playground.develop.fdelivery.databinding.ActivityProductDetailsBinding
 import playground.develop.fdelivery.ui.analytics.AnalyticLogger
 import playground.develop.fdelivery.utils.Extensions.short

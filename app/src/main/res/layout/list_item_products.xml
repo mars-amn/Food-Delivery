@@ -6,7 +6,7 @@
 
         <variable
             name="product"
-            type="playground.develop.fdelivery.data.Product" />
+            type="playground.develop.fdelivery.database.remote.Product" />
 
         <variable
             name="productHandlers"
@@ -16,7 +16,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="@dimen/list_item_products_parent_width"
-        android:layout_height="wrap_content"
+        android:layout_height="350dp"
         android:layout_margin="@dimen/list_item_products_parent_margin"
         app:cardCornerRadius="@dimen/list_item_products_parent_elevation"
         app:cardElevation="@dimen/common_elevation">
@@ -71,6 +71,7 @@
                 android:text="@{product.price}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:textSize="@dimen/list_item_products_price_size"
+                app:layout_constraintEnd_toStartOf="@id/listItemProductCart"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/listItemProductCart"
                 app:layout_constraintStart_toStartOf="parent"

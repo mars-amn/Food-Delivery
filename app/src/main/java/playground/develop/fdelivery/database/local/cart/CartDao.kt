@@ -20,4 +20,7 @@ interface CartDao {
 
     @Update
     fun updateProductInCart(product: CartProducts)
+
+    @Query("DELETE FROM CartProducts")
+    fun nukeCart()
 }
