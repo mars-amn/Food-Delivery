@@ -14,6 +14,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.tapadoo.alerter.Alerter
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import playground.develop.fdelivery.R
@@ -21,6 +22,9 @@ import playground.develop.fdelivery.adapters.CheckoutAdapter
 import playground.develop.fdelivery.database.local.cart.CartProducts
 import playground.develop.fdelivery.database.remote.Order
 import playground.develop.fdelivery.databinding.ActivityCheckoutBinding
+import playground.develop.fdelivery.utils.Constants.ORDER_STATUS_PROCESS
+import playground.develop.fdelivery.utils.Constants.PAYMENT_TYPE_CASH
+import playground.develop.fdelivery.utils.Constants.PAYMENT_TYPE_CREDIT_CARD
 import playground.develop.fdelivery.utils.Extensions.long
 import playground.develop.fdelivery.viewmodel.AppViewModel
 import playground.develop.fdelivery.viewmodel.LocalDatabaseViewModel
@@ -42,22 +46,47 @@ class CheckoutActivity : AppCompatActivity() {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_checkout)
         mBinding.deliveryHandlers = this
         loadCartProducts()
+        initGso()
+        initClient()
+    }
+
+    private fun initGso() {
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.client))
             .requestEmail()
             .build()
+    }
+
+    private fun initClient() {
         googleSignInClient = GoogleSignIn.getClient(this, gso)
     }
 
+
     fun onOrderClick(v: View) {
         if (::mProducts.isInitialized) {
-            if (mAuth.currentUser == null) {
-                createAuthRequiredDialog()
+            if (isInputsAreValid()) {
+                if (mAuth.currentUser == null) {
+                    createAuthRequiredDialog()
+                } else {
+                    submitOrder()
+                }
             } else {
-                submitOrder()
+                createEmptyAlerterMsg()
             }
-        } else {
         }
+    }
+
+    private fun createEmptyAlerterMsg() {
+        Alerter.create(this)
+            .setTitle(getString(R.string.inputs_empty_alerter_title))
+            .setText(getString(R.string.inputs_empty_alerter_msg))
+            .setIcon(R.drawable.ic_information)
+            .setDuration(2000)
+            .show()
+    }
+
+    private fun isInputsAreValid(): Boolean {
+        return getDeliverUserPhone() != "" && getDeliverUserAddress() != "" && getDeliverUserName() != ""
     }
 
 
@@ -127,8 +156,18 @@ class CheckoutActivity : AppCompatActivity() {
         return Order(mProducts,
                 getDeliverUserName(),
                 getDeliverUserAddress(),
-                "process",
+                getSelectedPaymentType(),
+                getDeliverUserPhone(),
+                ORDER_STATUS_PROCESS,
                 mAuth.currentUser?.uid + Date().time)
+    }
+
+    private fun getSelectedPaymentType(): String {
+        return if (isCashSelect()) {
+            PAYMENT_TYPE_CASH
+        } else {
+            PAYMENT_TYPE_CREDIT_CARD
+        }
     }
 
     private fun loadCartProducts() {
@@ -175,6 +214,9 @@ class CheckoutActivity : AppCompatActivity() {
 
     private fun getDeliverUserAddress(): String =
         mBinding.deliveryDetailsAddressInputField.text.toString()
+
+    private fun getDeliverUserPhone(): String =
+        mBinding.deliveryDetailsPhoneInputField.text.toString()
 
     private fun setCashChecked() {
         mBinding.paymentCashRadio.isChecked = true

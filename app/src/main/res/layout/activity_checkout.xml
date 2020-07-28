@@ -89,12 +89,22 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/deliveryDetailsNameInputField" />
 
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/deliveryDetailsPhoneInputField"
+                style="@style/InputFieldStyle"
+                android:hint="@string/delivery_txt_input_phone_hint"
+                android:inputType="phone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/deliveryDetailsAddressInputField" />
+
             <TextView
                 android:id="@+id/deliveryPaymentLabel"
                 style="@style/CheckoutLabelsStyle"
                 android:text="@string/payment_options_label"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/deliveryDetailsAddressInputField" />
+                app:layout_constraintTop_toBottomOf="@id/deliveryDetailsPhoneInputField" />
 
             <LinearLayout
                 android:id="@+id/cashPaymentParent"
@@ -109,18 +119,12 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:checked="true"
+                    android:fontFamily="@font/baloo"
+                    android:text="@string/cash_label"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     android:gravity="center"
                     android:onClick="@{deliveryHandlers::onCashSelect}" />
 
-                <TextView
-                    android:id="@+id/cashLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/baloo"
-                    android:onClick="@{deliveryHandlers::onCashSelect}"
-                    android:text="@string/cash_label"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
             </LinearLayout>
 
             <LinearLayout
@@ -134,19 +138,14 @@
                     android:id="@+id/paymentCreditCardRadio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="18sp"
                     android:layout_gravity="center"
                     android:gravity="center"
+                    android:fontFamily="@font/baloo"
+                    android:text="@string/credit_card_label"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     android:onClick="@{deliveryHandlers::onCreditCardSelect}" />
 
-                <TextView
-                    android:id="@+id/creditCardLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/baloo"
-                    android:onClick="@{deliveryHandlers::onCreditCardSelect}"
-                    android:text="@string/credit_card_label"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
             </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
@@ -157,8 +156,8 @@
                 android:layout_marginEnd="@dimen/order_button_margin"
                 android:layout_marginBottom="@dimen/order_button_margin_bottom"
                 android:background="@drawable/checkout_button_background"
-                android:text="@string/order_button_label"
                 android:onClick="@{deliveryHandlers::onOrderClick}"
+                android:text="@string/order_button_label"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

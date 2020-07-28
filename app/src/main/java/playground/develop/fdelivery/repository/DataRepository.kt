@@ -13,10 +13,13 @@ import org.koin.core.inject
 import playground.develop.fdelivery.data.Category
 import playground.develop.fdelivery.database.remote.Order
 import playground.develop.fdelivery.database.remote.Product
+import playground.develop.fdelivery.utils.Constants.ORDERS_COLLECTION
 import playground.develop.fdelivery.utils.Constants.ORDER_ADDRESS
 import playground.develop.fdelivery.utils.Constants.ORDER_ID
+import playground.develop.fdelivery.utils.Constants.ORDER_PAYMENT_TYPE
+import playground.develop.fdelivery.utils.Constants.ORDER_PHONE
 import playground.develop.fdelivery.utils.Constants.ORDER_PRODUCTS
-import playground.develop.fdelivery.utils.Constants.ORDER_STATUS
+import playground.develop.fdelivery.utils.Constants.ORDER_STATUS_PROCESS
 import playground.develop.fdelivery.utils.Constants.ORDER_USER_NAME
 import playground.develop.fdelivery.utils.DataUtils
 
@@ -82,8 +85,8 @@ class DataRepository : KoinComponent {
 
     fun createOrder(order: Order): LiveData<Boolean> {
         val orderSubmittingStatus = MutableLiveData<Boolean>()
-        mDB.collection("orders")
-            .document(order.orderId.toString())
+        mDB.collection(ORDERS_COLLECTION)
+            .document(order.orderId)
             .set(getMappedOrder(order))
             .addOnCompleteListener {
                 orderSubmittingStatus.value = it.isSuccessful
@@ -96,7 +99,9 @@ class DataRepository : KoinComponent {
         map[ORDER_PRODUCTS] = order.products
         map[ORDER_USER_NAME] = order.name
         map[ORDER_ADDRESS] = order.address
-        map[ORDER_STATUS] = order.status
+        map[ORDER_PAYMENT_TYPE] = order.paymentType
+        map[ORDER_PHONE] = order.phone
+        map[ORDER_STATUS_PROCESS] = order.status
         map[ORDER_ID] = order.orderId
         return map
     }

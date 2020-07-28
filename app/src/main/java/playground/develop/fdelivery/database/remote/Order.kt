@@ -6,8 +6,8 @@ import playground.develop.fdelivery.database.local.cart.CartProducts
 
 @Parcelize
 data class Order(var products: List<CartProducts>, val name: String, var address: String,
-    var status: String,
+    var paymentType: String, var phone: String, var status: String,
 
     var orderId: String) : Parcelable {
-    constructor() : this(ArrayList<CartProducts>(), "", "", "", "")
+    constructor() : this(ArrayList<CartProducts>(), "", "", "", "", "", "")
 }

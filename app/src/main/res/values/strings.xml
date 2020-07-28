@@ -50,4 +50,7 @@
     <string name="auth_required_dialog_message">In order to proceed with your delivery you should register</string>
     <string name="auth_required_dialog_positive_button">Ok</string>
     <string name="auth_required_dialog_negative_button">Never mind</string>
+    <string name="delivery_txt_input_phone_hint">Phone Number</string>
+    <string name="inputs_empty_alerter_title">Inputs Are Empty</string>
+    <string name="inputs_empty_alerter_msg">In order to proceed with your order, you have to provide the necessary information</string>
 </resources>
