@@ -45,7 +45,6 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
 dependencies {
     def koin_version = "2.1.5"
     def lifecycle_version = "2.2.0"
-    def arch_version = "2.1.0"
     def room_version = "2.2.5"
     def paging_version = "2.1.2"
     def alerter_version = "6.1.0"
@@ -61,7 +60,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.0'
+    implementation 'androidx.core:core-ktx:1.3.1'
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
@@ -130,4 +129,5 @@ dependencies {
      */
     implementation "com.tapadoo.android:alerter:$alerter_version"
 
+    implementation 'com.shuhart.stepview:stepview:1.5.1'
 }

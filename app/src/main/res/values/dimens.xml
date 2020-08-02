@@ -81,5 +81,12 @@
     <dimen name="payment_option_parent_width">150dp</dimen>
     <dimen name="payment_option_parent_margin">8dp</dimen>
     <dimen name="payment_option_parent_padding">8dp</dimen>
+    <dimen name="list_item_user_order_parent_padding">4dp</dimen>
+    <dimen name="list_item_user_order_parent_margin">4dp</dimen>
+    <dimen name="list_item_user_order_parent_height">200dp</dimen>
+    <dimen name="list_item_user_order_parent_radius">4dp</dimen>
+    <dimen name="list_item_user_order_parent_elevation">4dp</dimen>
+    <dimen name="list_item_user_order_text_margin">4dp</dimen>
+    <dimen name="list_item_user_order_text_padding">4dp</dimen>
 
 </resources>

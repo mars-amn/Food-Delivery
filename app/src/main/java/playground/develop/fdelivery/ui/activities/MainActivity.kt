@@ -27,6 +27,7 @@ import playground.develop.fdelivery.ui.analytics.AnalyticLogger
 import playground.develop.fdelivery.ui.fragments.CartFragment
 import playground.develop.fdelivery.ui.fragments.FavoriteFragment
 import playground.develop.fdelivery.ui.fragments.HomeFragment
+import playground.develop.fdelivery.ui.fragments.UserOrdersFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -66,6 +67,7 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.action_home -> showFragment(HomeFragment(), HOME_FRAGMENT)
                 R.id.action_favorites -> showFragment(FavoriteFragment(), OTHER_FRAGMENT)
+                R.id.action_grid -> showFragment(UserOrdersFragment(), OTHER_FRAGMENT)
             }
             true
         }

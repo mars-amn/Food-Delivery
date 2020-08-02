@@ -53,4 +53,5 @@
     <string name="delivery_txt_input_phone_hint">Phone Number</string>
     <string name="inputs_empty_alerter_title">Inputs Are Empty</string>
     <string name="inputs_empty_alerter_msg">In order to proceed with your order, you have to provide the necessary information</string>
+    <string name="user_orders_label">Your Orders</string>
 </resources>

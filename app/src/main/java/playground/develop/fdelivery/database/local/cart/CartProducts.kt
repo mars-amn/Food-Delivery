@@ -14,6 +14,7 @@ data class CartProducts(@ColumnInfo(name = "product_name") var productName: Stri
     @PrimaryKey @ColumnInfo(name = "product_code") var code: Long,
     @ColumnInfo(name = "product_image") var productImage: String,
     @ColumnInfo(name = "product_count") var count: Int) : Parcelable {
+    constructor() : this("", "", 0f, 0, "", 0)
 
     override fun equals(other: Any?): Boolean {
         if (other == null || other !is CartProducts) return false

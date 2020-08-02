@@ -12,6 +12,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.tapadoo.alerter.Alerter
@@ -159,6 +160,7 @@ class CheckoutActivity : AppCompatActivity() {
                 getSelectedPaymentType(),
                 getDeliverUserPhone(),
                 ORDER_STATUS_PROCESS,
+                Timestamp(Date()),
                 mAuth.currentUser?.uid + Date().time)
     }
 

@@ -32,4 +32,8 @@ class AppViewModel : ViewModel(), KoinComponent {
     fun createOrder(order: Order): LiveData<Boolean> {
         return mRepository.createOrder(order)
     }
+
+    fun getUserOrders(uid: String?): LiveData<List<Order>> {
+        return mRepository.getUserOrders(uid)
+    }
 }

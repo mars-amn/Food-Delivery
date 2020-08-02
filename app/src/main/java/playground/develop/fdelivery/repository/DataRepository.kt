@@ -15,6 +15,7 @@ import playground.develop.fdelivery.database.remote.Order
 import playground.develop.fdelivery.database.remote.Product
 import playground.develop.fdelivery.utils.Constants.ORDERS_COLLECTION
 import playground.develop.fdelivery.utils.Constants.ORDER_ADDRESS
+import playground.develop.fdelivery.utils.Constants.ORDER_DATE_CREATED
 import playground.develop.fdelivery.utils.Constants.ORDER_ID
 import playground.develop.fdelivery.utils.Constants.ORDER_PAYMENT_TYPE
 import playground.develop.fdelivery.utils.Constants.ORDER_PHONE
@@ -60,9 +61,8 @@ class DataRepository : KoinComponent {
         val products = MutableLiveData<List<Product>>()
         val list = ArrayList<Product>()
         mDB.collection(category)
-            .whereLessThanOrEqualTo("name", query)
-            .get()
-            .addOnCompleteListener { task ->
+            //  .whereLessThanOrEqualTo("name", query)
+            .get().addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     mDisposables.add(Observable.fromIterable(task.result?.toObjects(Product::class.java))
                         .filter {
@@ -103,6 +103,35 @@ class DataRepository : KoinComponent {
         map[ORDER_PHONE] = order.phone
         map[ORDER_STATUS_PROCESS] = order.status
         map[ORDER_ID] = order.orderId
+        map[ORDER_DATE_CREATED] = order.getDateCreated()
         return map
+    }
+
+    /**
+     * Downloading the entire collection and fiter it
+     * based on user's id because firestore doesn't support
+     * searching for text fields in a document!
+     * same goes for {@link #searchFor(String,String)}.
+     */
+    fun getUserOrders(uid: String?): LiveData<List<Order>> {
+        val orders = MutableLiveData<List<Order>>()
+        val ordersList = ArrayList<Order>()
+        mDB.collection(ORDERS_COLLECTION).get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                mDisposables.add(Observable.fromIterable(task.result?.toObjects(Order::class.java))
+                    .filter {
+                        it.orderId.toLowerCase().contains(uid?.toLowerCase()!!)
+                    }
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe { order ->
+                        ordersList.add(order)
+                        orders.value = ordersList
+                    })
+            } else {
+                Log.d("DataRepository", task.exception.toString())
+            }
+        }
+        return orders
     }
 }
